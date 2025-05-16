@@ -1,11 +1,15 @@
-import { View, Text, Image, StyleSheet, TouchableOpacity, Pressable } from 'react-native';
+import { View, Text, Image, StyleSheet, Pressable } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from 'expo-router';
 
 export default function Home() {
   const router = useRouter();
 
   return (
-    <View style={styles.container}>
+    <LinearGradient
+      colors={['#e0f0ff', '#ffffff']}
+      style={styles.container}
+    >
       <Image source={require('../assets/images/motogrid-logo.png')} style={styles.logo} />
 
       <Text style={styles.subtitle}>Bem-vindo ao</Text>
@@ -18,7 +22,7 @@ export default function Home() {
         <CustomButton text="Mapa" onPress={() => router.push('/mapa')} />
         <CustomButton text="Configurações" onPress={() => router.push('/configuracoes')} />
       </View>
-    </View>
+    </LinearGradient>
   );
 }
 
@@ -33,7 +37,6 @@ function CustomButton({ text, onPress }: { text: string; onPress: () => void }) 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f0f6ff',
     alignItems: 'center',
     justifyContent: 'center',
     paddingHorizontal: 24,
