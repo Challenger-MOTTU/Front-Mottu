@@ -1,6 +1,7 @@
 import { View, Text, StyleSheet, FlatList, Pressable } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from 'expo-router';
+import { useTheme } from './contexts/ThemeContext';
 
 const alertasMock = [
   { id: '1', placa: 'DEF3344', tipo: 'Avaria na lateral direita', data: '16/05/2025' },
@@ -10,26 +11,40 @@ const alertasMock = [
 
 export default function Alertas() {
   const router = useRouter();
+  const { temaEscuro } = useTheme();
 
   return (
-    <LinearGradient colors={['#e0f0ff', '#ffffff']} style={styles.container}>
-      <Text style={styles.title}>🚨 Alertas e Avarias</Text>
+    <LinearGradient
+      colors={temaEscuro ? ['#0f0f0f', '#1c1c1c'] : ['#e0f0ff', '#ffffff']}
+      style={styles.container}
+    >
+      <Text style={[styles.title, { color: temaEscuro ? '#ff6b6b' : '#D7263D' }]}>
+        🚨 Alertas e Avarias
+      </Text>
 
       <FlatList
         data={alertasMock}
         keyExtractor={(item) => item.id}
         contentContainerStyle={styles.lista}
         renderItem={({ item }) => (
-          <View style={styles.item}>
-            <Text style={styles.placa}>🏍️ {item.placa}</Text>
-            <Text style={styles.tipo}>⚠️ {item.tipo}</Text>
-            <Text style={styles.data}>{item.data}</Text>
+          <View style={[styles.item, { backgroundColor: temaEscuro ? '#2c2c2c' : '#fff' }]}>
+            <Text style={[styles.placa, { color: temaEscuro ? '#fff' : '#000' }]}>
+              🏍️ {item.placa}
+            </Text>
+            <Text style={[styles.tipo, { color: temaEscuro ? '#ff6b6b' : '#D7263D' }]}>
+              ⚠️ {item.tipo}
+            </Text>
+            <Text style={[styles.data, { color: temaEscuro ? '#aaa' : '#666' }]}>
+              {item.data}
+            </Text>
           </View>
         )}
       />
 
       <Pressable onPress={() => router.back()}>
-        <Text style={styles.voltar}>← Voltar para Home</Text>
+        <Text style={[styles.voltar, { color: temaEscuro ? '#ccc' : '#007AFF' }]}>
+          ← Voltar para Home
+        </Text>
       </Pressable>
     </LinearGradient>
   );
@@ -44,7 +59,6 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 24,
     fontFamily: 'Inter_700Bold',
-    color: '#D7263D',
     marginBottom: 20,
     textAlign: 'center',
   },
@@ -52,7 +66,6 @@ const styles = StyleSheet.create({
     paddingBottom: 40,
   },
   item: {
-    backgroundColor: '#fff',
     borderRadius: 10,
     padding: 14,
     marginBottom: 12,
@@ -66,18 +79,16 @@ const styles = StyleSheet.create({
   tipo: {
     fontSize: 14,
     fontFamily: 'Inter_400Regular',
-    color: '#D7263D',
     marginBottom: 2,
   },
   data: {
     fontSize: 12,
     fontFamily: 'Inter_400Regular',
-    color: '#666',
   },
   voltar: {
     marginTop: 16,
     textAlign: 'center',
-    color: '#007AFF',
     fontFamily: 'Inter_400Regular',
+    fontSize: 14,
   },
 });
