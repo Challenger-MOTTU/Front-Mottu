@@ -60,16 +60,18 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: '#555',
     marginTop: 12,
+    fontFamily: 'Inter_400Regular',
   },
   title: {
     fontSize: 34,
-    fontWeight: 'bold',
     color: '#007AFF',
     marginBottom: 6,
+    fontFamily: 'Inter_700Bold',
   },
   description: {
     fontSize: 14,
     color: '#666',
+    fontFamily: 'Inter_400Regular',
   },
   buttonContainer: {
     width: '100%',
@@ -92,6 +94,6 @@ const styles = StyleSheet.create({
   buttonText: {
     color: '#fff',
     fontSize: 17,
-    fontWeight: '600',
+    fontFamily: 'Inter_600SemiBold',
   },
 });
