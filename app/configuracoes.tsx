@@ -1,34 +1,26 @@
-import { useEffect, useState } from 'react';
 import { View, Text, Switch, StyleSheet, Pressable } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useRouter } from 'expo-router';
+import { useTheme } from './contexts/ThemeContext';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useState, useEffect } from 'react';
 
 export default function Configuracoes() {
   const router = useRouter();
+  const { temaEscuro, setTemaEscuro } = useTheme();
   const [notificacoesAtivas, setNotificacoesAtivas] = useState(false);
-  const [temaEscuro, setTemaEscuro] = useState(false);
 
   useEffect(() => {
     const carregarPreferencias = async () => {
       const noti = await AsyncStorage.getItem('notificacoes');
-      const tema = await AsyncStorage.getItem('temaEscuro');
-
       if (noti !== null) setNotificacoesAtivas(noti === 'true');
-      if (tema !== null) setTemaEscuro(tema === 'true');
     };
-
     carregarPreferencias();
   }, []);
 
   const alterarNotificacoes = async (valor: boolean) => {
     setNotificacoesAtivas(valor);
     await AsyncStorage.setItem('notificacoes', valor.toString());
-  };
-
-  const alterarTema = async (valor: boolean) => {
-    setTemaEscuro(valor);
-    await AsyncStorage.setItem('temaEscuro', valor.toString());
   };
 
   return (
@@ -58,7 +50,7 @@ export default function Configuracoes() {
         </Text>
         <Switch
           value={temaEscuro}
-          onValueChange={alterarTema}
+          onValueChange={setTemaEscuro}
           trackColor={{ false: '#ccc', true: '#007AFF' }}
           thumbColor={temaEscuro ? '#007AFF' : '#f4f3f4'}
         />
