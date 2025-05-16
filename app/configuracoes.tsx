@@ -1,12 +1,35 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { View, Text, Switch, StyleSheet, Pressable } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useRouter } from 'expo-router';
 
 export default function Configuracoes() {
   const router = useRouter();
-  const [notificacoesAtivas, setNotificacoesAtivas] = useState(true);
+  const [notificacoesAtivas, setNotificacoesAtivas] = useState(false);
   const [temaEscuro, setTemaEscuro] = useState(false);
+
+  useEffect(() => {
+    const carregarPreferencias = async () => {
+      const noti = await AsyncStorage.getItem('notificacoes');
+      const tema = await AsyncStorage.getItem('temaEscuro');
+
+      if (noti !== null) setNotificacoesAtivas(noti === 'true');
+      if (tema !== null) setTemaEscuro(tema === 'true');
+    };
+
+    carregarPreferencias();
+  }, []);
+
+  const alterarNotificacoes = async (valor: boolean) => {
+    setNotificacoesAtivas(valor);
+    await AsyncStorage.setItem('notificacoes', valor.toString());
+  };
+
+  const alterarTema = async (valor: boolean) => {
+    setTemaEscuro(valor);
+    await AsyncStorage.setItem('temaEscuro', valor.toString());
+  };
 
   return (
     <LinearGradient colors={['#e0f0ff', '#ffffff']} style={styles.container}>
@@ -16,7 +39,7 @@ export default function Configuracoes() {
         <Text style={styles.label}>🔔 Notificações</Text>
         <Switch
           value={notificacoesAtivas}
-          onValueChange={setNotificacoesAtivas}
+          onValueChange={alterarNotificacoes}
           trackColor={{ false: '#ccc', true: '#007AFF' }}
           thumbColor={notificacoesAtivas ? '#007AFF' : '#f4f3f4'}
         />
@@ -26,7 +49,7 @@ export default function Configuracoes() {
         <Text style={styles.label}>🌓 Tema Escuro</Text>
         <Switch
           value={temaEscuro}
-          onValueChange={setTemaEscuro}
+          onValueChange={alterarTema}
           trackColor={{ false: '#ccc', true: '#007AFF' }}
           thumbColor={temaEscuro ? '#007AFF' : '#f4f3f4'}
         />
