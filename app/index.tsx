@@ -1,27 +1,32 @@
 import { View, Text, Image, StyleSheet, Pressable } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from 'expo-router';
+import * as Animatable from 'react-native-animatable';
 
 export default function Home() {
   const router = useRouter();
 
   return (
-    <LinearGradient
-      colors={['#e0f0ff', '#ffffff']}
-      style={styles.container}
-    >
-      <Image source={require('../assets/images/motogrid-logo.png')} style={styles.logo} />
+    <LinearGradient colors={['#e0f0ff', '#ffffff']} style={styles.container}>
+      <Animatable.Image
+        animation="fadeInDown"
+        duration={1000}
+        source={require('../assets/images/motogrid-logo.png')}
+        style={styles.logo}
+      />
 
-      <Text style={styles.subtitle}>Bem-vindo ao</Text>
-      <Text style={styles.title}>MotoGrid</Text>
-      <Text style={styles.description}>Gestão inteligente de motos nos pátios</Text>
+      <Animatable.View animation="fadeInUp" delay={400} style={styles.textGroup}>
+        <Text style={styles.subtitle}>Bem-vindo ao</Text>
+        <Text style={styles.title}>MotoGrid</Text>
+        <Text style={styles.description}>Gestão inteligente de motos nos pátios</Text>
+      </Animatable.View>
 
-      <View style={styles.buttonContainer}>
+      <Animatable.View animation="fadeInUp" delay={800} style={styles.buttonContainer}>
         <CustomButton text="Cadastro" onPress={() => router.push('/cadastro')} />
         <CustomButton text="Detalhes" onPress={() => router.push('/detalhes')} />
         <CustomButton text="Mapa" onPress={() => router.push('/mapa')} />
         <CustomButton text="Configurações" onPress={() => router.push('/configuracoes')} />
-      </View>
+      </Animatable.View>
     </LinearGradient>
   );
 }
@@ -47,6 +52,10 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
     marginBottom: 12,
   },
+  textGroup: {
+    alignItems: 'center',
+    marginBottom: 40,
+  },
   subtitle: {
     fontSize: 18,
     color: '#555',
@@ -61,7 +70,6 @@ const styles = StyleSheet.create({
   description: {
     fontSize: 14,
     color: '#666',
-    marginBottom: 40,
   },
   buttonContainer: {
     width: '100%',
