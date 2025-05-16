@@ -1,9 +1,9 @@
 import { Text, View } from 'react-native';
 
-export default function Configuracoes() {
+export default function Detalhes() {
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>⚙️ Tela de Configurações</Text>
+      <Text>📄 Tela de Detalhes</Text>
     </View>
   );
 }

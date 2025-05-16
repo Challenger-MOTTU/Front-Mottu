@@ -1,33 +1,31 @@
 import { useState } from 'react';
-import { View, Text, TextInput, StyleSheet, Pressable, Alert, KeyboardAvoidingView, Platform, ScrollView } from 'react-native';
+import { View, Text, TextInput, Pressable, StyleSheet, Alert, KeyboardAvoidingView, Platform, ScrollView } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from 'expo-router';
 
-export default function Cadastro() {
-  const router = useRouter();
-
+export default function Registrar() {
   const [nome, setNome] = useState('');
   const [placa, setPlaca] = useState('');
-  const [observacoes, setObservacoes] = useState('');
+  const [zona, setZona] = useState('');
+  const router = useRouter();
 
-  const handleSalvar = () => {
-    if (!nome || !placa) {
-      Alert.alert('Campos obrigatórios', 'Preencha o nome e a placa da moto.');
+  const handleRegistrar = () => {
+    if (!nome || !placa || !zona) {
+      Alert.alert('Preencha todos os campos!');
       return;
     }
 
-    console.log({ nome, placa, observacoes });
-    Alert.alert('Cadastro Salvo', `Nome: ${nome}\nPlaca: ${placa}\nObs: ${observacoes}`);
+    Alert.alert('Moto Registrada', `Condutor: ${nome}\nPlaca: ${placa}\nZona: ${zona}`);
     setNome('');
     setPlaca('');
-    setObservacoes('');
+    setZona('');
   };
 
   return (
     <LinearGradient colors={['#e0f0ff', '#ffffff']} style={styles.container}>
-      <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : undefined} style={styles.formWrapper}>
-        <ScrollView contentContainerStyle={styles.form}>
-          <Text style={styles.title}>Cadastro de Moto</Text>
+      <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : undefined} style={styles.wrapper}>
+        <ScrollView contentContainerStyle={styles.inner}>
+          <Text style={styles.title}>📍 Registrar Moto no Pátio</Text>
 
           <TextInput
             placeholder="Nome do condutor"
@@ -35,7 +33,6 @@ export default function Cadastro() {
             value={nome}
             onChangeText={setNome}
           />
-
           <TextInput
             placeholder="Placa da moto"
             style={styles.input}
@@ -44,18 +41,15 @@ export default function Cadastro() {
             autoCapitalize="characters"
             maxLength={7}
           />
-
           <TextInput
-            placeholder="Observações"
-            style={[styles.input, styles.inputArea]}
-            value={observacoes}
-            onChangeText={setObservacoes}
-            multiline
-            numberOfLines={4}
+            placeholder="Zona ou Fila (ex: Zona A)"
+            style={styles.input}
+            value={zona}
+            onChangeText={setZona}
           />
 
-          <Pressable style={styles.button} onPress={handleSalvar}>
-            <Text style={styles.buttonText}>Salvar</Text>
+          <Pressable style={styles.button} onPress={handleRegistrar}>
+            <Text style={styles.buttonText}>Registrar</Text>
           </Pressable>
 
           <Pressable onPress={() => router.back()}>
@@ -71,20 +65,21 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  formWrapper: {
+  wrapper: {
     flex: 1,
     justifyContent: 'center',
     paddingHorizontal: 24,
   },
-  form: {
+  inner: {
     alignItems: 'center',
     paddingVertical: 40,
   },
   title: {
-    fontSize: 26,
+    fontSize: 24,
     fontFamily: 'Inter_700Bold',
-    marginBottom: 24,
     color: '#007AFF',
+    marginBottom: 24,
+    textAlign: 'center',
   },
   input: {
     width: '100%',
@@ -99,10 +94,6 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.05,
     shadowRadius: 2,
     elevation: 1,
-  },
-  inputArea: {
-    height: 100,
-    textAlignVertical: 'top',
   },
   button: {
     backgroundColor: '#007AFF',
