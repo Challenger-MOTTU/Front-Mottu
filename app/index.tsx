@@ -2,7 +2,7 @@ import { View, Text, Image, StyleSheet, Pressable, ScrollView } from 'react-nati
 import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from 'expo-router';
 import * as Animatable from 'react-native-animatable';
-import { useTheme } from '../contexts/ThemeContext';
+import { useTheme } from './contexts/ThemeContext';
 
 export default function Home() {
   const router = useRouter();
