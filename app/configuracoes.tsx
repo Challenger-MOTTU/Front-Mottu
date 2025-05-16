@@ -32,11 +32,18 @@ export default function Configuracoes() {
   };
 
   return (
-    <LinearGradient colors={['#e0f0ff', '#ffffff']} style={styles.container}>
-      <Text style={styles.title}>⚙️ Configurações do Sistema</Text>
+    <LinearGradient
+      colors={temaEscuro ? ['#0f0f0f', '#1c1c1c'] : ['#e0f0ff', '#ffffff']}
+      style={styles.container}
+    >
+      <Text style={[styles.title, { color: temaEscuro ? '#fff' : '#007AFF' }]}>
+        ⚙️ Configurações do Sistema
+      </Text>
 
-      <View style={styles.item}>
-        <Text style={styles.label}>🔔 Notificações</Text>
+      <View style={[styles.item, { backgroundColor: temaEscuro ? '#2c2c2c' : '#fff' }]}>
+        <Text style={[styles.label, { color: temaEscuro ? '#fff' : '#000' }]}>
+          🔔 Notificações
+        </Text>
         <Switch
           value={notificacoesAtivas}
           onValueChange={alterarNotificacoes}
@@ -45,8 +52,10 @@ export default function Configuracoes() {
         />
       </View>
 
-      <View style={styles.item}>
-        <Text style={styles.label}>🌓 Tema Escuro</Text>
+      <View style={[styles.item, { backgroundColor: temaEscuro ? '#2c2c2c' : '#fff' }]}>
+        <Text style={[styles.label, { color: temaEscuro ? '#fff' : '#000' }]}>
+          🌓 Tema Escuro
+        </Text>
         <Switch
           value={temaEscuro}
           onValueChange={alterarTema}
@@ -56,7 +65,9 @@ export default function Configuracoes() {
       </View>
 
       <Pressable onPress={() => router.back()}>
-        <Text style={styles.voltar}>← Voltar para Home</Text>
+        <Text style={[styles.voltar, { color: temaEscuro ? '#ccc' : '#007AFF' }]}>
+          ← Voltar para Home
+        </Text>
       </Pressable>
     </LinearGradient>
   );
@@ -71,7 +82,6 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 24,
     fontFamily: 'Inter_700Bold',
-    color: '#007AFF',
     marginBottom: 30,
     textAlign: 'center',
   },
@@ -79,7 +89,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    backgroundColor: '#fff',
     padding: 14,
     borderRadius: 10,
     marginBottom: 16,
@@ -92,7 +101,6 @@ const styles = StyleSheet.create({
   voltar: {
     marginTop: 24,
     textAlign: 'center',
-    color: '#007AFF',
     fontFamily: 'Inter_400Regular',
     fontSize: 14,
   },

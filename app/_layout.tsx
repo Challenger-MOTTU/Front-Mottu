@@ -1,6 +1,12 @@
 import { Slot } from 'expo-router';
-import { useFonts, Inter_400Regular, Inter_600SemiBold, Inter_700Bold } from '@expo-google-fonts/inter';
+import {
+  useFonts,
+  Inter_400Regular,
+  Inter_600SemiBold,
+  Inter_700Bold,
+} from '@expo-google-fonts/inter';
 import { View, ActivityIndicator } from 'react-native';
+import { ThemeProvider } from './contexts/ThemeContext';
 
 export default function Layout() {
   const [fontsLoaded] = useFonts({
@@ -17,5 +23,9 @@ export default function Layout() {
     );
   }
 
-  return <Slot />;
+  return (
+    <ThemeProvider>
+      <Slot />
+    </ThemeProvider>
+  );
 }

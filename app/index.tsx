@@ -2,12 +2,17 @@ import { View, Text, Image, StyleSheet, Pressable, ScrollView } from 'react-nati
 import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from 'expo-router';
 import * as Animatable from 'react-native-animatable';
+import { useTheme } from '../contexts/ThemeContext';
 
 export default function Home() {
   const router = useRouter();
+  const { temaEscuro } = useTheme();
 
   return (
-    <LinearGradient colors={['#cde0ff', '#f5f9ff']} style={styles.container}>
+    <LinearGradient
+      colors={temaEscuro ? ['#0f0f0f', '#1c1c1c'] : ['#cde0ff', '#f5f9ff']}
+      style={styles.container}
+    >
       <ScrollView contentContainerStyle={styles.scrollContent}>
         <Animatable.Image
           animation="fadeInDown"
@@ -17,9 +22,15 @@ export default function Home() {
         />
 
         <Animatable.View animation="fadeInUp" delay={400} style={styles.textGroup}>
-          <Text style={styles.subtitle}>Bem-vindo ao</Text>
-          <Text style={styles.title}>MotoGrid</Text>
-          <Text style={styles.description}>Gestão inteligente de motos nos pátios</Text>
+          <Text style={[styles.subtitle, { color: temaEscuro ? '#ccc' : '#555' }]}>
+            Bem-vindo ao
+          </Text>
+          <Text style={[styles.title, { color: temaEscuro ? '#fff' : '#007AFF' }]}>
+            MotoGrid
+          </Text>
+          <Text style={[styles.description, { color: temaEscuro ? '#aaa' : '#666' }]}>
+            Gestão inteligente de motos nos pátios
+          </Text>
         </Animatable.View>
 
         <Animatable.View animation="fadeInUp" delay={800} style={styles.buttonContainer}>
@@ -68,19 +79,16 @@ const styles = StyleSheet.create({
   },
   subtitle: {
     fontSize: 18,
-    color: '#555',
     marginTop: 12,
     fontFamily: 'Inter_400Regular',
   },
   title: {
     fontSize: 34,
-    color: '#007AFF',
     fontFamily: 'Inter_700Bold',
     marginBottom: 6,
   },
   description: {
     fontSize: 14,
-    color: '#666',
     fontFamily: 'Inter_400Regular',
   },
   buttonContainer: {
