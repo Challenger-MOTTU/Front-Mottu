@@ -1,6 +1,7 @@
 import { View, Text, StyleSheet, FlatList, Pressable } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from 'expo-router';
+import { useTheme } from './contexts/ThemeContext';
 
 const movimentacoesMock = [
   { id: '1', placa: 'ABC1234', tipo: 'Entrada', data: '16/05/2025 09:22' },
@@ -11,26 +12,40 @@ const movimentacoesMock = [
 
 export default function Historico() {
   const router = useRouter();
+  const { temaEscuro } = useTheme();
 
   return (
-    <LinearGradient colors={['#e0f0ff', '#ffffff']} style={styles.container}>
-      <Text style={styles.title}>🧾 Histórico de Movimentações</Text>
+    <LinearGradient
+      colors={temaEscuro ? ['#0f0f0f', '#1c1c1c'] : ['#e0f0ff', '#ffffff']}
+      style={styles.container}
+    >
+      <Text style={[styles.title, { color: temaEscuro ? '#fff' : '#007AFF' }]}>
+        🧾 Histórico de Movimentações
+      </Text>
 
       <FlatList
         data={movimentacoesMock}
         keyExtractor={(item) => item.id}
         contentContainerStyle={styles.lista}
         renderItem={({ item }) => (
-          <View style={styles.item}>
-            <Text style={styles.placa}>🏍️ {item.placa}</Text>
-            <Text style={styles.tipo}>{item.tipo}</Text>
-            <Text style={styles.data}>{item.data}</Text>
+          <View style={[styles.item, { backgroundColor: temaEscuro ? '#2c2c2c' : '#fff' }]}>
+            <Text style={[styles.placa, { color: temaEscuro ? '#fff' : '#000' }]}>
+              🏍️ {item.placa}
+            </Text>
+            <Text style={[styles.tipo, { color: temaEscuro ? '#4ea3ff' : '#007AFF' }]}>
+              {item.tipo}
+            </Text>
+            <Text style={[styles.data, { color: temaEscuro ? '#aaa' : '#666' }]}>
+              {item.data}
+            </Text>
           </View>
         )}
       />
 
       <Pressable onPress={() => router.back()}>
-        <Text style={styles.voltar}>← Voltar para Home</Text>
+        <Text style={[styles.voltar, { color: temaEscuro ? '#ccc' : '#007AFF' }]}>
+          ← Voltar para Home
+        </Text>
       </Pressable>
     </LinearGradient>
   );
@@ -45,7 +60,6 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 24,
     fontFamily: 'Inter_700Bold',
-    color: '#007AFF',
     marginBottom: 20,
     textAlign: 'center',
   },
@@ -53,7 +67,6 @@ const styles = StyleSheet.create({
     paddingBottom: 40,
   },
   item: {
-    backgroundColor: '#fff',
     borderRadius: 10,
     padding: 14,
     marginBottom: 12,
@@ -67,18 +80,16 @@ const styles = StyleSheet.create({
   tipo: {
     fontSize: 14,
     fontFamily: 'Inter_400Regular',
-    color: '#007AFF',
     marginBottom: 2,
   },
   data: {
     fontSize: 12,
     fontFamily: 'Inter_400Regular',
-    color: '#666',
   },
   voltar: {
     marginTop: 16,
     textAlign: 'center',
-    color: '#007AFF',
     fontFamily: 'Inter_400Regular',
+    fontSize: 14,
   },
 });
