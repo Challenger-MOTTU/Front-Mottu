@@ -1,13 +1,11 @@
 {
   "expo": {
-    "name": "MotoGrid",
-    "slug": "motogrid-mobile",
-    "version": "1.0.0",
-    "orientation": "portrait",
-    "splash": {
-      "image": "./assets/images/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
-    }
-}
+    "scheme": "acme",
+    "plugins": [
+      "expo-router",
+      "expo-font"
+    ],
+    "name": "motogrid-mobile",
+    "slug": "motogrid-mobile"
+  }
 }
