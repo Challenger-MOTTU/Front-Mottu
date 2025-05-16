@@ -2,18 +2,25 @@ import { StyleSheet, Text, View, Dimensions, Pressable } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from 'expo-router';
+import { useTheme } from './contexts/ThemeContext';
 
 export default function Mapa() {
   const router = useRouter();
+  const { temaEscuro } = useTheme();
 
   return (
-    <LinearGradient colors={['#e0f0ff', '#ffffff']} style={styles.container}>
-      <Text style={styles.title}>🗺️ Mapa do Pátio</Text>
+    <LinearGradient
+      colors={temaEscuro ? ['#0f0f0f', '#1c1c1c'] : ['#e0f0ff', '#ffffff']}
+      style={styles.container}
+    >
+      <Text style={[styles.title, { color: temaEscuro ? '#fff' : '#007AFF' }]}>
+        🗺️ Mapa do Pátio
+      </Text>
 
       <MapView
         style={styles.map}
         initialRegion={{
-          latitude: -23.55052,       // Use a coordenada do pátio real aqui
+          latitude: -23.55052,
           longitude: -46.633308,
           latitudeDelta: 0.005,
           longitudeDelta: 0.005,
@@ -27,7 +34,9 @@ export default function Mapa() {
       </MapView>
 
       <Pressable onPress={() => router.back()}>
-        <Text style={styles.voltar}>← Voltar para Home</Text>
+        <Text style={[styles.voltar, { color: temaEscuro ? '#ccc' : '#007AFF' }]}>
+          ← Voltar para Home
+        </Text>
       </Pressable>
     </LinearGradient>
   );
@@ -42,7 +51,6 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 24,
     fontFamily: 'Inter_700Bold',
-    color: '#007AFF',
     marginBottom: 12,
   },
   map: {
@@ -53,6 +61,6 @@ const styles = StyleSheet.create({
   voltar: {
     marginTop: 20,
     fontFamily: 'Inter_400Regular',
-    color: '#007AFF',
+    fontSize: 14,
   },
 });
