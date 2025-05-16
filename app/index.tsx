@@ -22,10 +22,15 @@ export default function Home() {
       </Animatable.View>
 
       <Animatable.View animation="fadeInUp" delay={800} style={styles.buttonContainer}>
-        <CustomButton text="Cadastro" onPress={() => router.push('/cadastro')} />
-        <CustomButton text="Detalhes" onPress={() => router.push('/detalhes')} />
-        <CustomButton text="Mapa" onPress={() => router.push('/mapa')} />
-        <CustomButton text="Configurações" onPress={() => router.push('/configuracoes')} />
+        <CustomButton text="📍 Registrar Moto no Pátio" onPress={() => router.push('/registrar')} />
+        <CustomButton text="🔍 Buscar Moto por Placa" onPress={() => router.push('/buscar')} />
+        <CustomButton text="🗺️ Visualizar Mapa do Pátio" onPress={() => router.push('/mapa')} />
+        <CustomButton text="🧾 Histórico de Movimentações" onPress={() => router.push('/historico')} />
+        <CustomButton text="⚙️ Configurações do Sistema" onPress={() => router.push('/configuracoes')} />
+        <CustomButton text="📸 Identificar Moto via Câmera" onPress={() => router.push('/camera')} />
+        <CustomButton text="🚨 Alertas e Avarias" onPress={() => router.push('/alertas')} />
+        <CustomButton text="📦 Ver Motos Aguardando Saída" onPress={() => router.push('/aguardando')} />
+
       </Animatable.View>
     </LinearGradient>
   );
