@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { View, Text, StyleSheet, Pressable, ActivityIndicator } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from 'expo-router';
-import { useTheme } from '../contexts/ThemeContext';
+import { useTheme } from './contexts/ThemeContext';
 
 export default function Camera() {
   const router = useRouter();
