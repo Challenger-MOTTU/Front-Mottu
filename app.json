@@ -1,0 +1,10 @@
+{
+  "expo": {
+    "scheme": "acme",
+    "plugins": [
+      "expo-router"
+    ],
+    "name": "motogrid-mobile",
+    "slug": "motogrid-mobile"
+  }
+}
