@@ -2,9 +2,12 @@ import { useState } from 'react';
 import { View, Text, StyleSheet, Pressable, ActivityIndicator } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from 'expo-router';
+import { useTheme } from '../contexts/ThemeContext';
 
 export default function Camera() {
   const router = useRouter();
+  const { temaEscuro } = useTheme();
+
   const [identificando, setIdentificando] = useState(false);
   const [resultado, setResultado] = useState<string | null>(null);
 
@@ -15,32 +18,47 @@ export default function Camera() {
     setTimeout(() => {
       setIdentificando(false);
       setResultado('🏍️ Moto identificada: ABC1234\n📍 Zona A - Fila 1');
-    }, 2500); // simula carregamento da IA
+    }, 2500);
   };
 
   return (
-    <LinearGradient colors={['#e0f0ff', '#ffffff']} style={styles.container}>
-      <Text style={styles.title}>📸 Identificar Moto via Câmera</Text>
+    <LinearGradient
+      colors={temaEscuro ? ['#0f0f0f', '#1c1c1c'] : ['#e0f0ff', '#ffffff']}
+      style={styles.container}
+    >
+      <Text style={[styles.title, { color: temaEscuro ? '#fff' : '#007AFF' }]}>
+        📸 Identificar Moto via Câmera
+      </Text>
 
-      <Pressable style={styles.button} onPress={simularIdentificacao} disabled={identificando}>
+      <Pressable
+        style={styles.button}
+        onPress={simularIdentificacao}
+        disabled={identificando}
+      >
         <Text style={styles.buttonText}>Ativar Reconhecimento</Text>
       </Pressable>
 
       {identificando && (
-        <View style={styles.resultado}>
+        <View style={[styles.resultado, { backgroundColor: temaEscuro ? '#2c2c2c' : '#fff' }]}>
           <ActivityIndicator size="large" color="#007AFF" />
-          <Text style={styles.status}>Identificando moto...</Text>
+          <Text style={[styles.status, { color: temaEscuro ? '#ccc' : '#666' }]}>
+            Identificando moto...
+          </Text>
         </View>
       )}
 
       {resultado && (
-        <View style={styles.resultado}>
-          <Text style={styles.resultadoTexto}>{resultado}</Text>
+        <View style={[styles.resultado, { backgroundColor: temaEscuro ? '#2c2c2c' : '#fff' }]}>
+          <Text style={[styles.resultadoTexto, { color: temaEscuro ? '#fff' : '#000' }]}>
+            {resultado}
+          </Text>
         </View>
       )}
 
       <Pressable onPress={() => router.back()}>
-        <Text style={styles.voltar}>← Voltar para Home</Text>
+        <Text style={[styles.voltar, { color: temaEscuro ? '#ccc' : '#007AFF' }]}>
+          ← Voltar para Home
+        </Text>
       </Pressable>
     </LinearGradient>
   );
@@ -56,7 +74,6 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 24,
     fontFamily: 'Inter_700Bold',
-    color: '#007AFF',
     marginBottom: 30,
     textAlign: 'center',
   },
@@ -73,7 +90,6 @@ const styles = StyleSheet.create({
   },
   resultado: {
     marginTop: 30,
-    backgroundColor: '#fff',
     padding: 16,
     borderRadius: 12,
     elevation: 2,
@@ -89,12 +105,10 @@ const styles = StyleSheet.create({
     marginTop: 10,
     fontSize: 14,
     fontFamily: 'Inter_400Regular',
-    color: '#666',
   },
   voltar: {
     marginTop: 24,
     fontFamily: 'Inter_400Regular',
-    color: '#007AFF',
     fontSize: 14,
   },
 });
