@@ -27,10 +27,10 @@ export default function Home() {
           <CustomButton text="🔍 Buscar Moto por Placa" onPress={() => router.push('/buscar')} />
           <CustomButton text="🗺️ Visualizar Mapa do Pátio" onPress={() => router.push('/mapa')} />
           <CustomButton text="🧾 Histórico de Movimentações" onPress={() => router.push('/historico')} />
-          <CustomButton text="⚙️ Configurações do Sistema" onPress={() => router.push('/configuracoes')} />
           <CustomButton text="📸 Identificar Moto via Câmera" onPress={() => router.push('/camera')} />
           <CustomButton text="🚨 Alertas e Avarias" onPress={() => router.push('/alertas')} />
           <CustomButton text="📦 Ver Motos Aguardando Saída" onPress={() => router.push('/aguardando')} />
+          <CustomButton text="⚙️ Configurações do Sistema" onPress={() => router.push('/configuracoes')} />
         </Animatable.View>
       </ScrollView>
     </LinearGradient>
