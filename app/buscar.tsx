@@ -2,9 +2,12 @@ import { useState } from 'react';
 import { View, Text, TextInput, StyleSheet, Pressable, KeyboardAvoidingView, Platform, Alert } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from 'expo-router';
+import { useTheme } from './contexts/ThemeContext';
 
 export default function Buscar() {
   const router = useRouter();
+  const { temaEscuro } = useTheme();
+
   const [placa, setPlaca] = useState('');
   const [resultado, setResultado] = useState<null | { placa: string; condutor: string; zona: string }>(null);
 
@@ -14,7 +17,6 @@ export default function Buscar() {
       return;
     }
 
-    // Simulando busca
     if (placa.toUpperCase() === 'ABC1234') {
       setResultado({
         placa: 'ABC1234',
@@ -30,13 +32,22 @@ export default function Buscar() {
   };
 
   return (
-    <LinearGradient colors={['#e0f0ff', '#ffffff']} style={styles.container}>
+    <LinearGradient
+      colors={temaEscuro ? ['#0f0f0f', '#1c1c1c'] : ['#e0f0ff', '#ffffff']}
+      style={styles.container}
+    >
       <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : undefined} style={styles.inner}>
-        <Text style={styles.title}>🔍 Buscar Moto por Placa</Text>
+        <Text style={[styles.title, { color: temaEscuro ? '#fff' : '#007AFF' }]}>
+          🔍 Buscar Moto por Placa
+        </Text>
 
         <TextInput
           placeholder="Digite a placa (ex: ABC1234)"
-          style={styles.input}
+          placeholderTextColor={temaEscuro ? '#999' : undefined}
+          style={[
+            styles.input,
+            { backgroundColor: temaEscuro ? '#2c2c2c' : '#fff', color: temaEscuro ? '#fff' : '#000' },
+          ]}
           value={placa}
           onChangeText={setPlaca}
           autoCapitalize="characters"
@@ -48,15 +59,23 @@ export default function Buscar() {
         </Pressable>
 
         {resultado && (
-          <View style={styles.resultado}>
-            <Text style={styles.resultadoTexto}>Placa: {resultado.placa}</Text>
-            <Text style={styles.resultadoTexto}>Condutor: {resultado.condutor}</Text>
-            <Text style={styles.resultadoTexto}>Localização: {resultado.zona}</Text>
+          <View style={[styles.resultado, { backgroundColor: temaEscuro ? '#2c2c2c' : '#fff' }]}>
+            <Text style={[styles.resultadoTexto, { color: temaEscuro ? '#fff' : '#000' }]}>
+              Placa: {resultado.placa}
+            </Text>
+            <Text style={[styles.resultadoTexto, { color: temaEscuro ? '#fff' : '#000' }]}>
+              Condutor: {resultado.condutor}
+            </Text>
+            <Text style={[styles.resultadoTexto, { color: temaEscuro ? '#fff' : '#000' }]}>
+              Localização: {resultado.zona}
+            </Text>
           </View>
         )}
 
         <Pressable onPress={() => router.back()}>
-          <Text style={styles.voltar}>← Voltar para Home</Text>
+          <Text style={[styles.voltar, { color: temaEscuro ? '#ccc' : '#007AFF' }]}>
+            ← Voltar para Home
+          </Text>
         </Pressable>
       </KeyboardAvoidingView>
     </LinearGradient>
@@ -76,7 +95,6 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 24,
     fontFamily: 'Inter_700Bold',
-    color: '#007AFF',
     marginBottom: 20,
     textAlign: 'center',
   },
@@ -84,7 +102,6 @@ const styles = StyleSheet.create({
     width: '100%',
     padding: 14,
     borderRadius: 12,
-    backgroundColor: '#fff',
     fontSize: 16,
     fontFamily: 'Inter_400Regular',
     marginBottom: 14,
@@ -103,7 +120,6 @@ const styles = StyleSheet.create({
     fontFamily: 'Inter_600SemiBold',
   },
   resultado: {
-    backgroundColor: '#fff',
     padding: 16,
     borderRadius: 12,
     elevation: 2,
@@ -117,7 +133,6 @@ const styles = StyleSheet.create({
   },
   voltar: {
     marginTop: 10,
-    color: '#007AFF',
     fontFamily: 'Inter_400Regular',
     fontSize: 14,
   },
