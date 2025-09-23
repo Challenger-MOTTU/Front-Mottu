@@ -1,115 +1,167 @@
-import { View, Text, Image, StyleSheet, Pressable, ScrollView } from 'react-native';
+import { Link } from 'expo-router';
+import React, { useState, useEffect } from 'react';
+import { View, Text,TextInput, Image, StyleSheet, Pressable, ScrollView, Alert, TouchableOpacity } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from 'expo-router';
 import * as Animatable from 'react-native-animatable';
+import { signInWithEmailAndPassword, sendPasswordResetEmail } from 'firebase/auth';
+import{auth} from '../src/services/fireBaseConfig'
 import { useTheme } from './contexts/ThemeContext';
 
-export default function Home() {
+
+export default function Login(){
   const router = useRouter();
   const { temaEscuro } = useTheme();
 
-  return (
-    <LinearGradient
-      colors={temaEscuro ? ['#0f0f0f', '#1c1c1c'] : ['#cde0ff', '#f5f9ff']}
-      style={styles.container}
+  const [email, setEmail] = useState('');
+  const [senha, setSenha] = useState('');
+
+  useEffect(() => {
+    const verificarUsuarioLogado = async () => {
+      try {
+        const usuarioSalvo = await AsyncStorage.getItem('@user')
+        if (usuarioSalvo) {
+          router.push('/home')//Se tiver algo armazenado local, redireciona para HomeScreen
+        }
+      } catch (error) {
+        console.log("Erro ao verificar login", error)
+      }
+    }
+
+    //Chama a função estruturada acima
+    verificarUsuarioLogado()
+  },[])
+  
+  // Função para simular o envio do formulário
+const handleLogin = () => {
+  if (!email || !senha) {
+    Alert.alert('Atenção', 'Preencha todos os campos!');
+    return;
+  }
+  //Função para realizar o login
+  signInWithEmailAndPassword(auth, email, senha)
+    .then(async(userCredential)=>{
+      const user = userCredential.user
+      await AsyncStorage.setItem('@user',JSON.stringify(user))
+      router.push('/home')
+    })
+    .catch((error)=>{
+      const errorCode = error.code
+      const errorMessage = error.message
+      console.log("Error Mensagem: ",errorMessage)
+      if(error.code === 'auth/invalid-credential'){
+        Alert.alert("Error", "Verifique email e senha digitados.")
+      }
+    })
+  };
+
+  //Função enviar o e-mail de reset de senha para o usuário
+  const esqueceuSenha = () => {
+    if (!email) {
+      alert("Digite o email para recuperar a senha")
+      return
+    }
+    sendPasswordResetEmail(auth, email)
+      .then(() => { alert("Enviado e-mail de recuperação") })
+      .catch((error) => {
+        console.log("Error ao enviar email", error.message)
+        alert("Erro ao enviar e-mail. Verifique se o email está correto.")
+      })
+  }
+
+  return(
+    <LinearGradient 
+    colors={temaEscuro ? ['#0f0f0f', '#1c1c1c'] : ['#cde0ff', '#f5f9ff']}
+    style={styles.container}
     >
-      <ScrollView contentContainerStyle={styles.scrollContent}>
-        <Animatable.Image
-          animation="fadeInDown"
-          duration={1000}
-          source={require('../assets/images/motogrid-logo.png')}
-          style={styles.logo}
+      <Text style={[styles.titulo,]}>Login</Text>
+
+      
+
+
+      {/* Campo Email */}
+      <TextInput
+         style={[
+              styles.input,
+              { backgroundColor: temaEscuro ? '#2c2c2c' : '#fff', color: temaEscuro ? '#fff' : '#000' },
+            ]}
+        placeholder="E-mail"
+        placeholderTextColor={temaEscuro ? '#999' : undefined}
+        keyboardType="email-address"
+        autoCapitalize="none"
+        value={email}
+        onChangeText={setEmail}
+      />
+
+      {/* Campo Senha */}
+      <View>
+        <TextInput
+          style={[styles.input,
+          { backgroundColor: temaEscuro ? '#2c2c2c' : '#fff', color: temaEscuro ? '#fff' : '#000' }
+          ]}
+          placeholder='Senha'
+          placeholderTextColor={temaEscuro ? '#999' : undefined}
+          secureTextEntry={true}
+          value={senha}
+          onChangeText={setSenha}
         />
+      <TouchableOpacity style={[styles.botao, ]} onPress={handleLogin}>
+        <Text style={styles.textoBotao}>Login</Text>
+      </TouchableOpacity>
 
-        <Animatable.View animation="fadeInUp" delay={400} style={styles.textGroup}>
-          <Text style={[styles.subtitle, { color: temaEscuro ? '#ccc' : '#555' }]}>
-            Bem-vindo ao
-          </Text>
-          <Text style={[styles.title, { color: temaEscuro ? '#fff' : '#007AFF' }]}>
-            MotoGrid
-          </Text>
-          <Text style={[styles.description, { color: temaEscuro ? '#aaa' : '#666' }]}>
-            Gestão inteligente de motos nos pátios
-          </Text>
-        </Animatable.View>
+      <Link href="cadastro" style={{ marginTop: 20, marginLeft: 150, color: temaEscuro ? '#ccc' : '#007AFF'  }}>Cadastre-se</Link>
 
-        <Animatable.View animation="fadeInUp" delay={800} style={styles.buttonContainer}>
-          <CustomButton text="📍 Registrar Moto no Pátio" onPress={() => router.push('/registrar')} />
-          <CustomButton text="🔍 Buscar Moto por Placa" onPress={() => router.push('/buscar')} />
-          <CustomButton text="🗺️ Visualizar Mapa do Pátio" onPress={() => router.push('/mapa')} />
-          <CustomButton text="🧾 Histórico de Movimentações" onPress={() => router.push('/historico')} />
-          <CustomButton text="📸 Identificar Moto via Câmera" onPress={() => router.push('/camera')} />
-          <CustomButton text="🚨 Alertas e Avarias" onPress={() => router.push('/alertas')} />
-          <CustomButton text="📦 Ver Motos Aguardando Saída" onPress={() => router.push('/aguardando')} />
-          <CustomButton text="⚙️ Configurações do Sistema" onPress={() => router.push('/configuracoes')} />
-        </Animatable.View>
-      </ScrollView>
+      {/* Texto Esqueceu a senha */}
+      <Text style={{  justifyContent: "center", marginLeft: 130, color: temaEscuro ? '#ccc' : '#007AFF' }}
+        onPress={esqueceuSenha}>Esqueceu a senha
+      </Text>
+    </View>
+
     </LinearGradient>
-  );
-}
-
-function CustomButton({ text, onPress }: { text: string; onPress: () => void }) {
-  return (
-    <Pressable onPress={onPress} style={({ pressed }) => [styles.button, pressed && styles.buttonPressed]}>
-      <Text style={styles.buttonText}>{text}</Text>
-    </Pressable>
-  );
+    
+  )
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#121212',
+    justifyContent: 'center',
+    padding: 20,
   },
-  scrollContent: {
-    paddingHorizontal: 24,
-    paddingTop: 80,
-    paddingBottom: 40,
+  titulo: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    color: '#fff',
+    marginBottom: 30,
+    textAlign: 'center',
+  },
+  input: {
+    backgroundColor: '#1E1E1E',
+    color: '#fff',
+    borderRadius: 10,
+    padding: 15,
+    marginBottom: 15,
+    fontSize: 16,
+    borderWidth: 1,
+    borderColor: '#333',
+  },
+  botao: {
+    backgroundColor: '#00B37E',
+    padding: 15,
+    borderRadius: 10,
     alignItems: 'center',
   },
-  logo: {
-    width: 140,
-    height: 140,
-    resizeMode: 'contain',
-    alignSelf: 'center',
-    marginBottom: 12,
-  },
-  textGroup: {
-    alignItems: 'center',
-    marginBottom: 32,
-  },
-  subtitle: {
+  textoBotao: {
+    color: '#fff',
     fontSize: 18,
-    marginTop: 12,
-    fontFamily: 'Inter_400Regular',
+    fontWeight: 'bold',
   },
-  title: {
+   title: {
     fontSize: 34,
     fontFamily: 'Inter_700Bold',
     marginBottom: 6,
   },
-  description: {
-    fontSize: 14,
-    fontFamily: 'Inter_400Regular',
-  },
-  buttonContainer: {
-    gap: 14,
-    alignItems: 'center',
-    width: '100%',
-  },
-  button: {
-    width: '90%',
-    backgroundColor: '#007AFF',
-    paddingVertical: 14,
-    borderRadius: 14,
-    alignItems: 'center',
-    elevation: 3,
-  },
-  buttonPressed: {
-    backgroundColor: '#005ecb',
-  },
-  buttonText: {
-    color: '#fff',
-    fontSize: 16,
-    fontFamily: 'Inter_600SemiBold',
-  },
+  
 });

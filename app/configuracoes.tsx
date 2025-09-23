@@ -1,4 +1,4 @@
-import { View, Text, Switch, StyleSheet, Pressable } from 'react-native';
+import { View, Text, Switch, StyleSheet, Pressable, Button } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from 'expo-router';
 import { useTheme } from './contexts/ThemeContext';
@@ -9,6 +9,12 @@ export default function Configuracoes() {
   const router = useRouter();
   const { temaEscuro, setTemaEscuro } = useTheme();
   const [notificacoesAtivas, setNotificacoesAtivas] = useState(false);
+
+  const realizarLogoff = async () => {
+    await AsyncStorage.removeItem("@user");
+    router.push("/");
+  };
+
 
   useEffect(() => {
     const carregarPreferencias = async () => {
@@ -55,6 +61,8 @@ export default function Configuracoes() {
           thumbColor={temaEscuro ? '#007AFF' : '#f4f3f4'}
         />
       </View>
+
+      <Button title={"Sair da Conta"} onPress={realizarLogoff} />
 
       <Pressable onPress={() => router.back()}>
         <Text style={[styles.voltar, { color: temaEscuro ? '#ccc' : '#007AFF' }]}>

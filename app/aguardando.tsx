@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Inter_400Regular',
   },
   voltar: {
-    marginTop: 16,
+    marginBottom: 400,
     textAlign: 'center',
     fontFamily: 'Inter_400Regular',
     fontSize: 14,
