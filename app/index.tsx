@@ -22,7 +22,7 @@ export default function Login(){
       try {
         const usuarioSalvo = await AsyncStorage.getItem('@user')
         if (usuarioSalvo) {
-          router.push('/home')//Se tiver algo armazenado local, redireciona para HomeScreen
+          router.replace('/home')//Se tiver algo armazenado local, redireciona para HomeScreen
         }
       } catch (error) {
         console.log("Erro ao verificar login", error)
@@ -44,7 +44,7 @@ const handleLogin = () => {
     .then(async(userCredential)=>{
       const user = userCredential.user
       await AsyncStorage.setItem('@user',JSON.stringify(user))
-      router.push('/home')
+      router.replace('/home')
     })
     .catch((error)=>{
       const errorCode = error.code

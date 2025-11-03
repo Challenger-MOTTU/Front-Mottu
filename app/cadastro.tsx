@@ -25,7 +25,7 @@ export default function CadastroScreen() {
         const user = userCredential.user
         //console.log(user)
         await AsyncStorage.setItem('@user',JSON.stringify(user))
-        router.push("/home")
+        router.replace("/home")
       })
       .catch((error) => {
         const errorCode = error.code;
