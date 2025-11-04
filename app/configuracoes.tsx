@@ -4,17 +4,23 @@ import { useRouter } from 'expo-router';
 import { useTheme } from './contexts/ThemeContext';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 
 export default function Configuracoes() {
   const router = useRouter();
+  const {t,i18n} = useTranslation()
   const { temaEscuro, setTemaEscuro } = useTheme();
   const [notificacoesAtivas, setNotificacoesAtivas] = useState(false);
+
+  const toggleLanguage = () => {
+    const newLang = i18n.language === "pt" ? "es" : "pt";
+    i18n.changeLanguage(newLang);
+  };
 
   const realizarLogoff = async () => {
     await AsyncStorage.removeItem("@user");
     router.push("/");
   };
-
 
   useEffect(() => {
     const carregarPreferencias = async () => {
@@ -62,7 +68,12 @@ export default function Configuracoes() {
         />
       </View>
 
-      <Button title={"Sair da Conta"} onPress={realizarLogoff} />
+       <Button            
+          title={i18n.language === "pt" ? "Mudar para Espanhol" : "Switch to Portuguese"}
+          onPress={toggleLanguage}
+          color= "green"           
+        />  
+      <Button title={"Sair da Conta"} onPress={realizarLogoff} color = "red"/>
 
       <Pressable onPress={() => router.back()}>
         <Text style={[styles.voltar, { color: temaEscuro ? '#ccc' : '#007AFF' }]}>

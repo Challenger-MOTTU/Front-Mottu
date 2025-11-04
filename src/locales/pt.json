@@ -1,0 +1,13 @@
+{
+    "Alerts": {
+        "Alert1":" Alerta 1",
+        "Alert2":" Alerta 2",
+        "Alert3":" Alerta 3"
+    },
+    "hello": "Olá",
+    "CameraText":{
+        "Text1":" Este é o texto da câmera em português.",
+        "Text2":" Mais um texto em português."
+
+    }
+}

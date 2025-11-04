@@ -7,6 +7,8 @@ import {
 } from '@expo-google-fonts/inter';
 import { View, ActivityIndicator } from 'react-native';
 import { ThemeProvider } from './contexts/ThemeContext';
+import { I18nextProvider } from 'react-i18next';
+import i18n from "../src/services/i18n";
 
 export default function Layout() {
   const [fontsLoaded] = useFonts({
@@ -24,8 +26,10 @@ export default function Layout() {
   }
 
   return (
-    <ThemeProvider>
-      <Slot />
-    </ThemeProvider>
+    <I18nextProvider i18n={i18n}>
+      <ThemeProvider>
+        <Slot />
+      </ThemeProvider>
+    </I18nextProvider>
   );
 }
