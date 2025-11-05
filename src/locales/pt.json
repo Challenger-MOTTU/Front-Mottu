@@ -1,13 +1,30 @@
 {
-    "Alerts": {
-        "Alert1":" Alerta 1",
-        "Alert2":" Alerta 2",
-        "Alert3":" Alerta 3"
+    "alert":"Alerta",
+    "atention":"Atenção",
+    "error":"Erro",
+    "alerts": {
+        "alertIndex":{
+            "alert1":"Preencha todos os campos!",
+            "alert2":"Verifique email e senha digitados.",
+            "alert3":"Digite o email para recuperar a senha",
+            "alert4":"Enviado e-mail de recuperação",
+            "alert5":"Erro ao enviar e-mail. Verifique se o email está correto."
+        },
+        "alertRegister":" Alerta 1",
+        "alertCadastro":" Alerta 1",
+        "alertBuscar":{
+            "alert1":"Alerta 1",
+            "alert2":"Alerta 2"
+        }
+    },
+    "indexScreen":{
+        "Title":""
+
     },
     "hello": "Olá",
-    "CameraText":{
-        "Text1":" Este é o texto da câmera em português.",
-        "Text2":" Mais um texto em português."
+    "cameraText":{
+        "text1":" Este é o texto da câmera em português.",
+        "text2":" Mais um texto em português."
 
     }
 }

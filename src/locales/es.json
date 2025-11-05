@@ -1,3 +1,25 @@
 {
-  "hello": "Hola"
+  "alert":"Alerta",
+  "atention":"Atenção",
+  "error":"Erro",
+  "alerts": {
+    "alertIndex":{
+      "alert1":"Alerta 1",
+      "alert2":"Alert 2",
+      "alert3":"Alert 3",
+      "alert4":"Alert 4"
+    },
+     "alertRegister":" Alerta 1",
+     "alertCadastro":" Alerta 1",
+     "alertBuscar":{
+        "alert1":"Alerta 1",
+        "alert2":"Alerta 2"
+    }
+  },
+  "hello": "Olá",
+  "cameraText":{
+    "Text1":" Este é o texto da câmera em português.",
+    "Text2":" Mais um texto em português."
+
+  }
 }

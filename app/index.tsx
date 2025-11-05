@@ -8,12 +8,13 @@ import * as Animatable from 'react-native-animatable';
 import { signInWithEmailAndPassword, sendPasswordResetEmail } from 'firebase/auth';
 import{auth} from '../src/services/fireBaseConfig'
 import { useTheme } from './contexts/ThemeContext';
+import { useTranslation } from 'react-i18next';
 
 
 export default function Login(){
   const router = useRouter();
   const { temaEscuro } = useTheme();
-
+  const {t} = useTranslation()
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
 
@@ -36,7 +37,7 @@ export default function Login(){
   // Função para simular o envio do formulário
 const handleLogin = () => {
   if (!email || !senha) {
-    Alert.alert('Atenção', 'Preencha todos os campos!');
+    Alert.alert(t("atention"), t('alerts.alertIndex.alert1'));
     return;
   }
   //Função para realizar o login
@@ -51,7 +52,7 @@ const handleLogin = () => {
       const errorMessage = error.message
       console.log("Error Mensagem: ",errorMessage)
       if(error.code === 'auth/invalid-credential'){
-        Alert.alert("Error", "Verifique email e senha digitados.")
+        Alert.alert(t("error"), t("alerts.alertIndex.alert2"))
       }
     })
   };
@@ -59,14 +60,14 @@ const handleLogin = () => {
   //Função enviar o e-mail de reset de senha para o usuário
   const esqueceuSenha = () => {
     if (!email) {
-      alert("Digite o email para recuperar a senha")
+      alert(t("alerts.alertIndex.alert3"))
       return
     }
     sendPasswordResetEmail(auth, email)
-      .then(() => { alert("Enviado e-mail de recuperação") })
+      .then(() => { alert(t("alerts.alertIndex.alert4")) })
       .catch((error) => {
         console.log("Error ao enviar email", error.message)
-        alert("Erro ao enviar e-mail. Verifique se o email está correto.")
+        alert(t("alerts.alertIndex.alert5"))
       })
   }
 
