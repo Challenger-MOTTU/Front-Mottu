@@ -43,7 +43,7 @@
             "welcome2":"MotoGrid",
             "welcome3":"Gestão inteligente de motos nos pátios"
         },
-        "Button":{
+        "button":{
             "registerButton":"📍 Registrar Moto no Pátio",
             "searchButton":"🔍 Buscar Moto por Placa",
             "viewMapButton":"🗺️ Visualizar Mapa do Pátio",
@@ -118,6 +118,12 @@
 
     "waitScreen":{
         "title":"📦 Motos Aguardando Saída"
+    },
+
+    "aboutScreen":{
+        "title":"",
+        "description":"",
+        "footer":""
     }
    
 }

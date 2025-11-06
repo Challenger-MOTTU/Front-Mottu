@@ -72,7 +72,7 @@ export default function CadastroScreen() {
 
         {/* Botão */}
         <TouchableOpacity style={styles.botao} onPress={handleCadastro}>
-          <Text style={styles.textoBotao}>{t("cadastrarScreen.register")}</Text>
+          <Text style={styles.textoBotao}>{t("cadastroScreen.register")}</Text>
         </TouchableOpacity>
       </View>
     );

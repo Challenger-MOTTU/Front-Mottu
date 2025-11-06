@@ -36,14 +36,15 @@ export default function Home() {
         </Animatable.View>
 
         <Animatable.View animation="fadeInUp" delay={800} style={styles.buttonContainer}>
-          <CustomButton text={t("homeScreen.registerButton")} onPress={() => router.push('/registrar')} />
-          <CustomButton text={t("homeScreen.searchButton")} onPress={() => router.push('/buscar')} />
-          <CustomButton text={t("homeScreen.viewMapButton")} onPress={() => router.push('/mapa')} />
-          <CustomButton text={t("homeScreen.historyButton")} onPress={() => router.push('/historico')} />
-          <CustomButton text={t("homeScreen.identidyButton")} onPress={() => router.push('/camera')} />
-          <CustomButton text={t("homeScreen.alertButton")} onPress={() => router.push('/alertas')} />
-          <CustomButton text={t("homeScreen.viewMotoButton")} onPress={() => router.push('/aguardando')} />
-          <CustomButton text={t("homeScreen.settingsButton")} onPress={() => router.push('/configuracoes')} />
+          <CustomButton text={t("homeScreen.button.registerButton")} onPress={() => router.push('/registrar')} />
+          <CustomButton text={t("homeScreen.button.searchButton")} onPress={() => router.push('/buscar')} />
+          <CustomButton text={t("homeScreen.button.viewMapButton")} onPress={() => router.push('/mapa')} />
+          <CustomButton text={t("homeScreen.button.historyButton")} onPress={() => router.push('/historico')} />
+          <CustomButton text={t("homeScreen.button.identifyButton")} onPress={() => router.push('/camera')} />
+          <CustomButton text={t("homeScreen.button.alertButton")} onPress={() => router.push('/alertas')} />
+          <CustomButton text={t("homeScreen.button.viewMotosButton")} onPress={() => router.push('/aguardando')} />
+          <CustomButton text={t("homeScreen.button.settingsButton")} onPress={() => router.push('/configuracoes')} />
+          <CustomButton text={t("homeScreen.button.settingsButton")} onPress={() => router.push('/sobre')} />  
         </Animatable.View>
       </ScrollView>
     </LinearGradient>
