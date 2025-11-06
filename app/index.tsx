@@ -76,7 +76,7 @@ const handleLogin = () => {
     colors={temaEscuro ? ['#0f0f0f', '#1c1c1c'] : ['#cde0ff', '#f5f9ff']}
     style={styles.container}
     >
-      <Text style={[styles.titulo,]}>Login</Text>
+      <Text style={[styles.titulo,]}>{t("indexScreen.title")}</Text>
 
       
 
@@ -101,21 +101,21 @@ const handleLogin = () => {
           style={[styles.input,
           { backgroundColor: temaEscuro ? '#2c2c2c' : '#fff', color: temaEscuro ? '#fff' : '#000' }
           ]}
-          placeholder='Senha'
+          placeholder={t('indexScreen.password')}
           placeholderTextColor={temaEscuro ? '#999' : undefined}
           secureTextEntry={true}
           value={senha}
           onChangeText={setSenha}
         />
       <TouchableOpacity style={[styles.botao, ]} onPress={handleLogin}>
-        <Text style={styles.textoBotao}>Login</Text>
+        <Text style={styles.textoBotao}>{t('indexScreen.title')}</Text>
       </TouchableOpacity>
 
-      <Link href="cadastro" style={{ marginTop: 20, marginLeft: 150, color: temaEscuro ? '#ccc' : '#007AFF'  }}>Cadastre-se</Link>
+      <Link href="cadastro" style={{ marginTop: 20, marginLeft: 150, color: temaEscuro ? '#ccc' : '#007AFF'  }}>{t("indexScreen.register")}</Link>
 
       {/* Texto Esqueceu a senha */}
       <Text style={{  justifyContent: "center", marginLeft: 130, color: temaEscuro ? '#ccc' : '#007AFF' }}
-        onPress={esqueceuSenha}>Esqueceu a senha
+        onPress={esqueceuSenha}>{t("indexScreen.forgotPass")}
       </Text>
     </View>
 

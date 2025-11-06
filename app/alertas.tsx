@@ -2,6 +2,7 @@ import { View, Text, StyleSheet, FlatList, Pressable } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from 'expo-router';
 import { useTheme } from './contexts/ThemeContext';
+import { useTranslation } from 'react-i18next';
 
 const alertasMock = [
   { id: '1', placa: 'DEF3344', tipo: 'Avaria na lateral direita', data: '16/05/2025' },
@@ -11,6 +12,7 @@ const alertasMock = [
 
 export default function Alertas() {
   const router = useRouter();
+  const {t} = useTranslation();
   const { temaEscuro } = useTheme();
 
   return (
@@ -19,7 +21,7 @@ export default function Alertas() {
       style={styles.container}
     >
       <Text style={[styles.title, { color: temaEscuro ? '#ff6b6b' : '#D7263D' }]}>
-        🚨 Alertas e Avarias
+        {t("alertScreen.title")}
       </Text>
 
       <FlatList
@@ -43,7 +45,7 @@ export default function Alertas() {
 
       <Pressable onPress={() => router.back()}>
         <Text style={[styles.voltar, { color: temaEscuro ? '#ccc' : '#007AFF' }]}>
-          ← Voltar para Home
+          {t("backHome")}
         </Text>
       </Pressable>
     </LinearGradient>

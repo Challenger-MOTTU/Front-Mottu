@@ -3,11 +3,12 @@ import { View, Text, StyleSheet, Pressable, ActivityIndicator } from 'react-nati
 import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from 'expo-router';
 import { useTheme } from './contexts/ThemeContext';
+import { useTranslation } from 'react-i18next';
 
 export default function Camera() {
   const router = useRouter();
   const { temaEscuro } = useTheme();
-
+  const {t} = useTranslation();
   const [identificando, setIdentificando] = useState(false);
   const [resultado, setResultado] = useState<string | null>(null);
 
@@ -27,7 +28,7 @@ export default function Camera() {
       style={styles.container}
     >
       <Text style={[styles.title, { color: temaEscuro ? '#fff' : '#007AFF' }]}>
-        📸 Identificar Moto via Câmera
+        {t("cameraScreen.title")}
       </Text>
 
       <Pressable
@@ -35,14 +36,14 @@ export default function Camera() {
         onPress={simularIdentificacao}
         disabled={identificando}
       >
-        <Text style={styles.buttonText}>Ativar Reconhecimento</Text>
+        <Text style={styles.buttonText}>{t("cameraScreen.texts.text1")}</Text>
       </Pressable>
 
       {identificando && (
         <View style={[styles.resultado, { backgroundColor: temaEscuro ? '#2c2c2c' : '#fff' }]}>
           <ActivityIndicator size="large" color="#007AFF" />
           <Text style={[styles.status, { color: temaEscuro ? '#ccc' : '#666' }]}>
-            Identificando moto...
+            {t("cameraScreen.texts.text2")}
           </Text>
         </View>
       )}
@@ -57,7 +58,7 @@ export default function Camera() {
 
       <Pressable onPress={() => router.back()}>
         <Text style={[styles.voltar, { color: temaEscuro ? '#ccc' : '#007AFF' }]}>
-          ← Voltar para Home
+          {t("backHome")}
         </Text>
       </Pressable>
     </LinearGradient>

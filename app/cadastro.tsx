@@ -4,6 +4,7 @@ import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../src/services/fireBaseConfig'
 import { useRouter } from 'expo-router';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useTranslation } from 'react-i18next';
 
 export default function CadastroScreen() {
   // Estados para armazenar os valores digitados
@@ -11,12 +12,13 @@ export default function CadastroScreen() {
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
 
+  const {t} = useTranslation();
   const router = useRouter() // Hook para navegação
 
   // Função para simular o envio do formulário
   const handleCadastro = () => {
     if (!nome || !email || !senha) {
-      Alert.alert('Atenção', 'Preencha todos os campos!');
+      Alert.alert(t('atention'), t("alertCadastro"));
       return;
     }
     //Criação do usuário com email e senha
@@ -36,12 +38,12 @@ export default function CadastroScreen() {
 
     return (
       <View style={styles.container}>
-        <Text style={styles.titulo}>Criar Conta</Text>
+        <Text style={styles.titulo}>{t("cadastroScreen.title")}</Text>
 
         {/* Campo Nome */}
         <TextInput
           style={styles.input}
-          placeholder="Nome completo"
+          placeholder={t("cadastroScreen.inputs.name")}
           placeholderTextColor="#aaa"
           value={nome}
           onChangeText={setNome}
@@ -61,7 +63,7 @@ export default function CadastroScreen() {
         {/* Campo Senha */}
         <TextInput
           style={styles.input}
-          placeholder="Senha"
+          placeholder={t("cadastroScreen.inputs.password")}
           placeholderTextColor="#aaa"
           secureTextEntry
           value={senha}
@@ -70,7 +72,7 @@ export default function CadastroScreen() {
 
         {/* Botão */}
         <TouchableOpacity style={styles.botao} onPress={handleCadastro}>
-          <Text style={styles.textoBotao}>Cadastrar</Text>
+          <Text style={styles.textoBotao}>{t("cadastrarScreen.register")}</Text>
         </TouchableOpacity>
       </View>
     );

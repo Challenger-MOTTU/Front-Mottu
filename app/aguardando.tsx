@@ -2,6 +2,7 @@ import { View, Text, StyleSheet, FlatList, Pressable } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from 'expo-router';
 import { useTheme } from './contexts/ThemeContext';
+import { useTranslation } from 'react-i18next';
 
 const motosAguardandoMock = [
   { id: '1', placa: 'ABC1234', tempo: '15 min', status: 'Pronta para saída' },
@@ -11,6 +12,7 @@ const motosAguardandoMock = [
 
 export default function Aguardando() {
   const router = useRouter();
+  const {t} = useTranslation();
   const { temaEscuro } = useTheme();
 
   return (
@@ -19,7 +21,7 @@ export default function Aguardando() {
       style={styles.container}
     >
       <Text style={[styles.title, { color: temaEscuro ? '#fff' : '#007AFF' }]}>
-        📦 Motos Aguardando Saída
+        {t("waitScreen.title")}
       </Text>
 
       <FlatList
@@ -43,7 +45,7 @@ export default function Aguardando() {
 
       <Pressable onPress={() => router.back()}>
         <Text style={[styles.voltar, { color: temaEscuro ? '#ccc' : '#007AFF' }]}>
-          ← Voltar para Home
+          {t("backHome")}
         </Text>
       </Pressable>
     </LinearGradient>

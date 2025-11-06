@@ -2,9 +2,11 @@ import { View, Text, StyleSheet, Pressable } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from 'expo-router';
 import { useTheme } from './contexts/ThemeContext';
+import { useTranslation } from 'react-i18next';
 
 export default function Detalhes() {
   const router = useRouter();
+  const {t} = useTranslation();
   const { temaEscuro } = useTheme();
 
   return (
@@ -14,15 +16,15 @@ export default function Detalhes() {
     >
       <View style={styles.content}>
         <Text style={[styles.title, { color: temaEscuro ? '#fff' : '#007AFF' }]}>
-          📄 Tela de Detalhes
+          {t("detalhesScreen.title")}
         </Text>
         <Text style={[styles.texto, { color: temaEscuro ? '#ccc' : '#333' }]}>
-          Aqui você poderá visualizar os detalhes completos de uma moto selecionada.
+          {t("detalhesScreen.text")}
         </Text>
 
         <Pressable onPress={() => router.back()}>
           <Text style={[styles.voltar, { color: temaEscuro ? '#aaa' : '#007AFF' }]}>
-            ← Voltar para Home
+            {t("backHome")}
           </Text>
         </Pressable>
       </View>

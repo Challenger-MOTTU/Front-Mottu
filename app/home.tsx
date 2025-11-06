@@ -3,9 +3,11 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from 'expo-router';
 import * as Animatable from 'react-native-animatable';
 import { useTheme } from './contexts/ThemeContext';
+import {useTranslation} from 'react-i18next'
 
 export default function Home() {
   const router = useRouter();
+  const {t} = useTranslation();
   const { temaEscuro } = useTheme();
 
   return (
@@ -23,25 +25,25 @@ export default function Home() {
 
         <Animatable.View animation="fadeInUp" delay={400} style={styles.textGroup}>
           <Text style={[styles.subtitle, { color: temaEscuro ? '#ccc' : '#555' }]}>
-            Bem-vindo ao
+            {t("homeScreen.titleGroup.welcome1")}
           </Text>
           <Text style={[styles.title, { color: temaEscuro ? '#fff' : '#007AFF' }]}>
-            MotoGrid
+            {t("homeScreen.titleGroup.welcome2")}
           </Text>
           <Text style={[styles.description, { color: temaEscuro ? '#aaa' : '#666' }]}>
-            Gestão inteligente de motos nos pátios
+            {t("homeScreen.titleGroup.welcome3")}
           </Text>
         </Animatable.View>
 
         <Animatable.View animation="fadeInUp" delay={800} style={styles.buttonContainer}>
-          <CustomButton text="📍 Registrar Moto no Pátio" onPress={() => router.push('/registrar')} />
-          <CustomButton text="🔍 Buscar Moto por Placa" onPress={() => router.push('/buscar')} />
-          <CustomButton text="🗺️ Visualizar Mapa do Pátio" onPress={() => router.push('/mapa')} />
-          <CustomButton text="🧾 Histórico de Movimentações" onPress={() => router.push('/historico')} />
-          <CustomButton text="📸 Identificar Moto via Câmera" onPress={() => router.push('/camera')} />
-          <CustomButton text="🚨 Alertas e Avarias" onPress={() => router.push('/alertas')} />
-          <CustomButton text="📦 Ver Motos Aguardando Saída" onPress={() => router.push('/aguardando')} />
-          <CustomButton text="⚙️ Configurações do Sistema" onPress={() => router.push('/configuracoes')} />
+          <CustomButton text={t("homeScreen.registerButton")} onPress={() => router.push('/registrar')} />
+          <CustomButton text={t("homeScreen.searchButton")} onPress={() => router.push('/buscar')} />
+          <CustomButton text={t("homeScreen.viewMapButton")} onPress={() => router.push('/mapa')} />
+          <CustomButton text={t("homeScreen.historyButton")} onPress={() => router.push('/historico')} />
+          <CustomButton text={t("homeScreen.identidyButton")} onPress={() => router.push('/camera')} />
+          <CustomButton text={t("homeScreen.alertButton")} onPress={() => router.push('/alertas')} />
+          <CustomButton text={t("homeScreen.viewMotoButton")} onPress={() => router.push('/aguardando')} />
+          <CustomButton text={t("homeScreen.settingsButton")} onPress={() => router.push('/configuracoes')} />
         </Animatable.View>
       </ScrollView>
     </LinearGradient>

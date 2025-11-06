@@ -2,6 +2,7 @@ import { View, Text, StyleSheet, FlatList, Pressable } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from 'expo-router';
 import { useTheme } from './contexts/ThemeContext';
+import { useTranslation } from 'react-i18next';
 
 const movimentacoesMock = [
   { id: '1', placa: 'ABC1234', tipo: 'Entrada', data: '16/05/2025 09:22' },
@@ -12,6 +13,7 @@ const movimentacoesMock = [
 
 export default function Historico() {
   const router = useRouter();
+  const {t} = useTranslation();
   const { temaEscuro } = useTheme();
 
   return (
@@ -20,7 +22,7 @@ export default function Historico() {
       style={styles.container}
     >
       <Text style={[styles.title, { color: temaEscuro ? '#fff' : '#007AFF' }]}>
-        🧾 Histórico de Movimentações
+        {t("historicoScreen.title")}
       </Text>
 
       <FlatList
@@ -44,7 +46,7 @@ export default function Historico() {
 
       <Pressable onPress={() => router.back()}>
         <Text style={[styles.voltar, { color: temaEscuro ? '#ccc' : '#007AFF' }]}>
-          ← Voltar para Home
+          {t("backHome")}
         </Text>
       </Pressable>
     </LinearGradient>

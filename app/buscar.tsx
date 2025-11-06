@@ -3,9 +3,11 @@ import { View, Text, TextInput, StyleSheet, Pressable, KeyboardAvoidingView, Pla
 import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from 'expo-router';
 import { useTheme } from './contexts/ThemeContext';
+import { useTranslation } from 'react-i18next';
 
 export default function Buscar() {
   const router = useRouter();
+  const {t} = useTranslation();
   const { temaEscuro } = useTheme();
 
   const [placa, setPlaca] = useState('');
@@ -13,7 +15,7 @@ export default function Buscar() {
 
   const handleBuscar = () => {
     if (!placa) {
-      Alert.alert('Informe a placa da moto');
+      Alert.alert(t("alerts.alertBuscar.alert1"));
       return;
     }
 
@@ -25,7 +27,7 @@ export default function Buscar() {
       });
     } else {
       setResultado(null);
-      Alert.alert('Moto não encontrada');
+      Alert.alert(t("alerts.alertBuscar.alert2"));
     }
 
     setPlaca('');
@@ -38,11 +40,11 @@ export default function Buscar() {
     >
       <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : undefined} style={styles.inner}>
         <Text style={[styles.title, { color: temaEscuro ? '#fff' : '#007AFF' }]}>
-          🔍 Buscar Moto por Placa
+          {t("buscarScreen.title")}
         </Text>
 
         <TextInput
-          placeholder="Digite a placa (ex: ABC1234)"
+          placeholder={t("buscarScreen.input")}
           placeholderTextColor={temaEscuro ? '#999' : undefined}
           style={[
             styles.input,
@@ -55,26 +57,26 @@ export default function Buscar() {
         />
 
         <Pressable style={styles.button} onPress={handleBuscar}>
-          <Text style={styles.buttonText}>Buscar</Text>
+          <Text style={styles.buttonText}>{t("buscarScreen.buscarButton")}</Text>
         </Pressable>
 
         {resultado && (
           <View style={[styles.resultado, { backgroundColor: temaEscuro ? '#2c2c2c' : '#fff' }]}>
             <Text style={[styles.resultadoTexto, { color: temaEscuro ? '#fff' : '#000' }]}>
-              Placa: {resultado.placa}
+              {t("buscarScreen.texts.plate")} {resultado.placa}
             </Text>
             <Text style={[styles.resultadoTexto, { color: temaEscuro ? '#fff' : '#000' }]}>
-              Condutor: {resultado.condutor}
+              {t("buscarScreen.texts.conductor")} {resultado.condutor}
             </Text>
             <Text style={[styles.resultadoTexto, { color: temaEscuro ? '#fff' : '#000' }]}>
-              Localização: {resultado.zona}
+              {t("buscarScreen.texts.localization")} {resultado.zona}
             </Text>
           </View>
         )}
 
         <Pressable onPress={() => router.back()}>
           <Text style={[styles.voltar, { color: temaEscuro ? '#ccc' : '#007AFF' }]}>
-            ← Voltar para Home
+            {t("backHome")}
           </Text>
         </Pressable>
       </KeyboardAvoidingView>

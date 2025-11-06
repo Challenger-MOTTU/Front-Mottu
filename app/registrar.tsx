@@ -3,9 +3,11 @@ import { View, Text, TextInput, Pressable, StyleSheet, Alert, KeyboardAvoidingVi
 import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from 'expo-router';
 import { useTheme } from './contexts/ThemeContext';
+import { useTranslation } from 'react-i18next';
 
 export default function Registrar() {
   const [nome, setNome] = useState('');
+  const {t}=useTranslation();
   const [placa, setPlaca] = useState('');
   const [zona, setZona] = useState('');
   const router = useRouter();
@@ -13,11 +15,11 @@ export default function Registrar() {
 
   const handleRegistrar = () => {
     if (!nome || !placa || !zona) {
-      Alert.alert('Preencha todos os campos!');
+      Alert.alert(t("alerts.alertRegister.alert1"));
       return;
     }
 
-    Alert.alert('Moto Registrada', `Condutor: ${nome}\nPlaca: ${placa}\nZona: ${zona}`);
+    Alert.alert(t("alerts.alertRegister.alert2"), `Condutor: ${nome}\nPlaca: ${placa}\nZona: ${zona}`);
     setNome('');
     setPlaca('');
     setZona('');
@@ -31,11 +33,11 @@ export default function Registrar() {
       <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : undefined} style={styles.wrapper}>
         <ScrollView contentContainerStyle={styles.inner}>
           <Text style={[styles.title, { color: temaEscuro ? '#fff' : '#007AFF' }]}>
-            📍 Registrar Moto no Pátio
+            {t("registrarScreen.title")}
           </Text>
 
           <TextInput
-            placeholder="Nome do condutor"
+            placeholder={t("registrarScreen.inputs.input1")}
             placeholderTextColor={temaEscuro ? '#999' : undefined}
             style={[
               styles.input,
@@ -45,7 +47,7 @@ export default function Registrar() {
             onChangeText={setNome}
           />
           <TextInput
-            placeholder="Placa da moto"
+            placeholder={t("registrarScreen.inputs.input2")}
             placeholderTextColor={temaEscuro ? '#999' : undefined}
             style={[
               styles.input,
@@ -57,7 +59,7 @@ export default function Registrar() {
             maxLength={7}
           />
           <TextInput
-            placeholder="Zona ou Fila (ex: Zona A)"
+            placeholder={t("registrarScreen.inputs.input3")}
             placeholderTextColor={temaEscuro ? '#999' : undefined}
             style={[
               styles.input,
@@ -68,11 +70,11 @@ export default function Registrar() {
           />
 
           <Pressable style={styles.button} onPress={handleRegistrar}>
-            <Text style={styles.buttonText}>Registrar</Text>
+            <Text style={styles.buttonText}>{t("register")}</Text>
           </Pressable>
 
           <Pressable onPress={() => router.back()}>
-            <Text style={[styles.voltar, { color: temaEscuro ? '#ccc' : '#007AFF' }]}>← Voltar para Home</Text>
+            <Text style={[styles.voltar, { color: temaEscuro ? '#ccc' : '#007AFF' }]}>{t("backHome")}</Text>
           </Pressable>
         </ScrollView>
       </KeyboardAvoidingView>

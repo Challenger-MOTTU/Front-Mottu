@@ -41,12 +41,12 @@ export default function Configuracoes() {
       style={styles.container}
     >
       <Text style={[styles.title, { color: temaEscuro ? '#fff' : '#007AFF' }]}>
-        ⚙️ Configurações do Sistema
+        {t("configuracoesScreen.title")}
       </Text>
 
       <View style={[styles.item, { backgroundColor: temaEscuro ? '#2c2c2c' : '#fff' }]}>
         <Text style={[styles.label, { color: temaEscuro ? '#fff' : '#000' }]}>
-          🔔 Notificações
+          {t("configuracoesScreen.notify")}
         </Text>
         <Switch
           value={notificacoesAtivas}
@@ -58,7 +58,7 @@ export default function Configuracoes() {
 
       <View style={[styles.item, { backgroundColor: temaEscuro ? '#2c2c2c' : '#fff' }]}>
         <Text style={[styles.label, { color: temaEscuro ? '#fff' : '#000' }]}>
-          🌓 Tema Escuro
+          {t("configuracoesScreen.tema")}
         </Text>
         <Switch
           value={temaEscuro}
@@ -73,11 +73,11 @@ export default function Configuracoes() {
           onPress={toggleLanguage}
           color= "green"           
         />  
-      <Button title={"Sair da Conta"} onPress={realizarLogoff} color = "red"/>
+      <Button title={t("configuracoesScreen.sairButton")} onPress={realizarLogoff} color = "red"/>
 
       <Pressable onPress={() => router.back()}>
         <Text style={[styles.voltar, { color: temaEscuro ? '#ccc' : '#007AFF' }]}>
-          ← Voltar para Home
+          {t("backHome")}
         </Text>
       </Pressable>
     </LinearGradient>
