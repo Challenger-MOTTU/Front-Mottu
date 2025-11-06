@@ -25,11 +25,10 @@ export default function Sobre() {
         {/* Título e descrição */}
         <Animatable.View animation="fadeInUp" delay={300} style={styles.textGroup}>
           <Text style={[styles.title, { color: temaEscuro ? '#fff' : '#007AFF' }]}>
-            {t("aboutScreen.title") || "Sobre o Projeto"}
+            {t("aboutScreen.title") }
           </Text>
           <Text style={[styles.description, { color: temaEscuro ? '#aaa' : '#555' }]}>
-            {t("aboutScreen.description") ||
-              "Este aplicativo foi desenvolvido por estudantes dedicados, com foco em inovação, tecnologia e sustentabilidade."}
+            {t("aboutScreen.description")}
           </Text>
         </Animatable.View>
 
@@ -73,7 +72,7 @@ export default function Sobre() {
           delay={900}
           style={[styles.footer, { color: temaEscuro ? '#777' : '#666' }]}
         >
-          {t("aboutScreen.footer") || "© 2025 MotoGrid — Todos os direitos reservados."}
+          {t("aboutScreen.footer")}
         </Animatable.Text>
       </ScrollView>
     </LinearGradient>

@@ -121,9 +121,9 @@
     },
 
     "aboutScreen":{
-        "title":"",
-        "description":"",
-        "footer":""
+        "title":"Sobre o Projeto",
+        "description":"Este aplicativo foi desenvolvido por estudantes dedicados, com foco em inovação, tecnologia e sustentabilidade.",
+        "footer":"© 2025 MotoGrid — Todos os direitos reservados."
     }
    
 }
