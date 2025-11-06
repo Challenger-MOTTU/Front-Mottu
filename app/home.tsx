@@ -44,7 +44,7 @@ export default function Home() {
           <CustomButton text={t("homeScreen.button.alertButton")} onPress={() => router.push('/alertas')} />
           <CustomButton text={t("homeScreen.button.viewMotosButton")} onPress={() => router.push('/aguardando')} />
           <CustomButton text={t("homeScreen.button.settingsButton")} onPress={() => router.push('/configuracoes')} />
-          <CustomButton text={t("homeScreen.button.settingsButton")} onPress={() => router.push('/sobre')} />  
+          <CustomButton text={t("homeScreen.button.aboutButton")} onPress={() => router.push('/sobre')} />  
         </Animatable.View>
       </ScrollView>
     </LinearGradient>

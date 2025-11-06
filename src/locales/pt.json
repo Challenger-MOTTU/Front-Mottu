@@ -51,7 +51,8 @@
             "identifyButton":"📸 Identificar Moto via Câmera",
             "alertButton":"🚨 Alertas e Avarias",
             "viewMotosButton":"📦 Ver Motos Aguardando Saída",
-            "settingsButton":"⚙️ Configurações do Sistema"
+            "settingsButton":"⚙️ Configurações do Sistema",
+            "aboutButton":"Sobre o projeto"
         }
     },
     

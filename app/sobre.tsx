@@ -1,11 +1,13 @@
-import { View, Text, Image, StyleSheet, ScrollView } from 'react-native';
+import { View, Text, Image, StyleSheet, ScrollView, Pressable  } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import * as Animatable from 'react-native-animatable';
 import { useTheme } from './contexts/ThemeContext';
+import { useRouter } from 'expo-router';
 import { useTranslation } from 'react-i18next';
 
 export default function Sobre() {
   const { temaEscuro } = useTheme();
+  const router = useRouter();
   const { t } = useTranslation();
 
   return (
@@ -66,6 +68,12 @@ export default function Sobre() {
           </Text>
         </View>
 
+        <Pressable onPress={() => router.back()}>
+            <Text style={[styles.voltar, { color: temaEscuro ? '#ccc' : '#007AFF' }]}>
+              {t("backHome")}
+            </Text>
+        </Pressable>
+
         {/* Rodapé */}
         <Animatable.Text
           animation="fadeInUp"
@@ -74,6 +82,8 @@ export default function Sobre() {
         >
           {t("aboutScreen.footer")}
         </Animatable.Text>
+
+        
       </ScrollView>
     </LinearGradient>
   );
@@ -149,5 +159,10 @@ const styles = StyleSheet.create({
     fontSize: 14,
     textAlign: 'center',
     fontFamily: 'Inter_400Regular',
+  },
+  voltar: {
+    marginTop: 20,
+    fontFamily: 'Inter_400Regular',
+    fontSize: 14,
   },
 });
