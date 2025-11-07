@@ -4,33 +4,35 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from 'expo-router';
 import { useTheme } from './contexts/ThemeContext';
 import { useTranslation } from 'react-i18next';
-import { addMoto } from '../src/services/api/motoService'; // importa sua função da API
+import api from '../src/services/api/apiClient';
 
-export default function Registrar() {
-  const [modelo, setModelo] = useState('');
-  const [placa, setPlaca] = useState('');
-  const [status, setStatus] = useState('');
-  const [patioId, setPatioId] = useState('');
-  const router = useRouter();
+export default function PatioRegistrar() {
+  const [nome, setNome] = useState('');
+  const [cidade, setCidade] = useState('');
+  const [capacidade, setCapacidade] = useState('');
   const { temaEscuro } = useTheme();
   const { t } = useTranslation();
+  const router = useRouter();
 
   const handleRegistrar = async () => {
-    if (!modelo || !placa || !status || !patioId) {
-      Alert.alert('Erro', 'Preencha todos os campos para registrar a moto.');
+    if (!nome || !cidade || !capacidade) {
+      Alert.alert('Preencha todos os campos');
       return;
     }
 
     try {
-      const novaMoto = await addMoto(modelo, placa, status, Number(patioId));
-      Alert.alert('Sucesso', `Moto cadastrada!\nModelo: ${novaMoto.modelo}\nPlaca: ${novaMoto.placa}`);
-      setModelo('');
-      setPlaca('');
-      setStatus('');
-      setPatioId('');
+      await api.post('/patios', {
+        nome,
+        cidade,
+        capacidade: Number(capacidade),
+      });
+      Alert.alert('✅ Sucesso', 'Pátio cadastrado com sucesso!');
+      setNome('');
+      setCidade('');
+      setCapacidade('');
     } catch (error) {
       console.error(error);
-      Alert.alert('Erro', 'Não foi possível registrar a moto. Verifique os dados.');
+      Alert.alert('❌ Erro', 'Não foi possível cadastrar o pátio.');
     }
   };
 
@@ -42,58 +44,45 @@ export default function Registrar() {
       <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : undefined} style={styles.wrapper}>
         <ScrollView contentContainerStyle={styles.inner}>
           <Text style={[styles.title, { color: temaEscuro ? '#fff' : '#007AFF' }]}>
-            Registrar Moto
+            Cadastrar Pátio
           </Text>
 
           <TextInput
-            placeholder="Modelo"
+            placeholder="Nome do Pátio"
             placeholderTextColor={temaEscuro ? '#999' : undefined}
             style={[
               styles.input,
               { backgroundColor: temaEscuro ? '#2c2c2c' : '#fff', color: temaEscuro ? '#fff' : '#000' },
             ]}
-            value={modelo}
-            onChangeText={setModelo}
+            value={nome}
+            onChangeText={setNome}
           />
 
           <TextInput
-            placeholder="Placa"
+            placeholder="Cidade"
             placeholderTextColor={temaEscuro ? '#999' : undefined}
             style={[
               styles.input,
               { backgroundColor: temaEscuro ? '#2c2c2c' : '#fff', color: temaEscuro ? '#fff' : '#000' },
             ]}
-            value={placa}
-            onChangeText={setPlaca}
-            autoCapitalize="characters"
-            maxLength={7}
+            value={cidade}
+            onChangeText={setCidade}
           />
 
           <TextInput
-            placeholder="Status (ex: disponível, em uso)"
+            placeholder="Capacidade"
             placeholderTextColor={temaEscuro ? '#999' : undefined}
             style={[
               styles.input,
               { backgroundColor: temaEscuro ? '#2c2c2c' : '#fff', color: temaEscuro ? '#fff' : '#000' },
             ]}
-            value={status}
-            onChangeText={setStatus}
-          />
-
-          <TextInput
-            placeholder="ID do Pátio"
-            placeholderTextColor={temaEscuro ? '#999' : undefined}
+            value={capacidade}
+            onChangeText={setCapacidade}
             keyboardType="numeric"
-            style={[
-              styles.input,
-              { backgroundColor: temaEscuro ? '#2c2c2c' : '#fff', color: temaEscuro ? '#fff' : '#000' },
-            ]}
-            value={patioId}
-            onChangeText={setPatioId}
           />
 
           <Pressable style={styles.button} onPress={handleRegistrar}>
-            <Text style={styles.buttonText}>Registrar</Text>
+            <Text style={styles.buttonText}>Cadastrar</Text>
           </Pressable>
 
           <Pressable onPress={() => router.back()}>
@@ -109,40 +98,14 @@ const styles = StyleSheet.create({
   container: { flex: 1 },
   wrapper: { flex: 1, justifyContent: 'center', paddingHorizontal: 24 },
   inner: { alignItems: 'center', paddingVertical: 40 },
-  title: {
-    fontSize: 24,
-    fontFamily: 'Inter_700Bold',
-    marginBottom: 24,
-    textAlign: 'center',
-  },
+  title: { fontSize: 24, fontFamily: 'Inter_700Bold', marginBottom: 24, textAlign: 'center' },
   input: {
-    width: '100%',
-    padding: 14,
-    borderRadius: 12,
-    fontSize: 16,
-    fontFamily: 'Inter_400Regular',
-    marginBottom: 14,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.05,
-    shadowRadius: 2,
-    elevation: 1,
+    width: '100%', padding: 14, borderRadius: 12, fontSize: 16,
+    fontFamily: 'Inter_400Regular', marginBottom: 14,
+    shadowColor: '#000', shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.05, shadowRadius: 2, elevation: 1,
   },
-  button: {
-    backgroundColor: '#007AFF',
-    paddingVertical: 14,
-    paddingHorizontal: 40,
-    borderRadius: 14,
-    marginTop: 10,
-  },
-  buttonText: {
-    color: '#fff',
-    fontSize: 16,
-    fontFamily: 'Inter_600SemiBold',
-  },
-  voltar: {
-    marginTop: 20,
-    fontFamily: 'Inter_400Regular',
-    fontSize: 14,
-  },
+  button: { backgroundColor: '#007AFF', paddingVertical: 14, paddingHorizontal: 40, borderRadius: 14, marginTop: 10 },
+  buttonText: { color: '#fff', fontSize: 16, fontFamily: 'Inter_600SemiBold' },
+  voltar: { marginTop: 20, fontFamily: 'Inter_400Regular', fontSize: 14 },
 });

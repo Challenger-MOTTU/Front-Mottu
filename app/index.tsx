@@ -73,7 +73,7 @@ const handleLogin = () => {
 
   return(
     <LinearGradient 
-    colors={temaEscuro ? ['#0f0f0f', '#1c1c1c'] : ['#cde0ff', '#f5f9ff']}
+    colors={temaEscuro ? ['#0f0f0f', '#1c1c1c'] : ['#0f0f0f', '#1c1c1c']}
     style={styles.container}
     >
       <Text style={[styles.titulo,]}>{t("indexScreen.title")}</Text>

@@ -37,21 +37,21 @@ export default function Sobre() {
         {/* Integrantes com fotos */}
         <Animatable.View animation="fadeInUp" delay={600} style={styles.membersContainer}>
           <View style={styles.memberItem}>
-            <Image source={require('../assets/images/motogrid-logo.png')} style={styles.memberImage} />
+            <Image source={require('../assets/images/victor.jpg')} style={styles.memberImage} />
             <Text style={[styles.member, { color: temaEscuro ? '#fff' : '#333' }]}>
               Victor Hugo Carvalho Pereira
             </Text>
           </View>
 
           <View style={styles.memberItem}>
-            <Image source={require('../assets/images/motogrid-logo.png')} style={styles.memberImage} />
+            <Image source={require('../assets/images/Juliana.jpeg')} style={styles.memberImage} />
             <Text style={[styles.member, { color: temaEscuro ? '#fff' : '#333' }]}>
               Juliana de Andrade Sousa
             </Text>
           </View>
 
           <View style={styles.memberItem}>
-            <Image source={require('../assets/images/motogrid-logo.png')} style={styles.memberImage} />
+            <Image source={require('../assets/images/gabriel.jpeg')} style={styles.memberImage} />
             <Text style={[styles.member, { color: temaEscuro ? '#fff' : '#333' }]}>
               Gabriel Gomes Mancera
             </Text>
