@@ -1,123 +1,127 @@
 {
-    "backHome":"← Voltar para Home",
+    "backHome": "← Volver al Inicio",
     
-    "register":"Registrar",
+    "register": "Registrar",
     
-    "alert":"Alerta",
+    "alert": "Alerta",
     
-    "atention":"Atenção",
+    "atention": "Atención",
     
-    "error":"Erro",
+    "error": "Error",
     
     "alerts": {
-        "alertIndex":{
-            "alert1":"Preencha todos os campos!",
-            "alert2":"Verifique email e senha digitados.",
-            "alert3":"Digite o email para recuperar a senha",
-            "alert4":"Enviado e-mail de recuperação",
-            "alert5":"Erro ao enviar e-mail. Verifique se o email está correto."
+        "alertIndex": {
+            "alert1": "¡Rellena todos los campos!",
+            "alert2": "Verifica el correo electrónico y la contraseña ingresados.",
+            "alert3": "Ingresa el correo electrónico para recuperar la contraseña",
+            "alert4": "Correo de recuperación enviado",
+            "alert5": "Error al enviar el correo. Verifica si el correo electrónico es correcto."
         },
-        "alertRegister":{
-            "alert1":"Preencha todos os campos!",
-            "alert2":"Moto Registrada"
+        "alertRegister": {
+            "alert1": "¡Rellena todos los campos!",
+            "alert2": "Moto Registrada"
         },
-        "alertCadastro":"Preencha todos os campos!",
-        "alertBuscar":{
-            "alert1":"Informe a placa da moto",
-            "alert2":"Moto não encontrada"
-        }
-    },
- 
-
-
-    "indexScreen":{
-        "title":"Login",
-        "password":"Senha",
-        "register":"Cadastre-se",
-        "forgotPass":"Esqueçeu a senha?"
-    },
-    
-    "homeScreen":{
-        "titleGroup":{
-            "welcome1":"Bem-vindo ao",
-            "welcome2":"MotoGrid",
-            "welcome3":"Gestão inteligente de motos nos pátios"
-        },
-        "Button":{
-            "registerButton":"📍 Registrar Moto no Pátio",
-            "searchButton":"🔍 Buscar Moto por Placa",
-            "viewMapButton":"🗺️ Visualizar Mapa do Pátio",
-            "historyButton":"🧾 Histórico de Movimentações",
-            "identifyButton":"📸 Identificar Moto via Câmera",
-            "alertButton":"🚨 Alertas e Avarias",
-            "viewMotosButton":"📦 Ver Motos Aguardando Saída",
-            "settingsButton":"⚙️ Configurações do Sistema"
-        }
-    },
-    
-    "mapaScreen":{
-        "title":"🗺️ Mapa do Pátio"
-    },
-    
-    "registrarScreen":{
-        "title":"📍 Registrar Moto no Pátio",
-        "inputs":{
-            "input1":"Nome do condutor",
-            "input2":"Placa da moto",
-            "input3":"Zona ou Fila (ex: Zona A)"
-        }
-    },
-    
-    "historicoScreen":{
-        "title":"🧾 Histórico de Movimentações"
-    },
-    
-    "detalhesScreen":{
-        "title":"📄 Tela de Detalhes",
-        "text":"Aqui você poderá visualizar os detalhes completos de uma moto selecionada."
-    },
-    
-    "configuracoesScreen":{
-        "title":"⚙️ Configurações do Sistema",
-        "notify":"🔔 Notificações",
-        "tema":"🌓 Tema Escuro",
-        "sairButton":"Sair da Conta"
-    },
-    
-    "cameraScreen":{
-        "title":"📸 Identificar Moto via Câmera",
-        "texts":{
-            "text1":"Ativar Reconhecimento",
-            "text2":"Identificando moto..."
-        }
-    },
-    
-    "cadastroScreen":{
-        "title":"Criar Conta",
-        "inputs":{
-            "name":"Nome completo",
-            "password":"Senha"
-        },
-        "register":"Cadastrar"
-    },
-    
-    "buscarScreen":{
-        "title":"🔍 Buscar Moto por Placa",
-        "buscarButton":"Buscar",
-        "input":"Digite a placa (ex: ABC1234)",
-        "texts":{
-            "plate":"Placa:",
-            "conductor":"Condutor:",
-            "localization":"Localização:"
+        "alertCadastro": "¡Rellena todos los campos!",
+        "alertBuscar": {
+            "alert1": "Ingresa la placa de la moto",
+            "alert2": "Moto no encontrada"
         }
     },
 
-    "alertScreen":{
-        "title":"🚨 Alertas e Avarias"
+    "indexScreen": {
+        "title": "Inicio de Sesión",
+        "password": "Contraseña",
+        "register": "Regístrate",
+        "forgotPass": "¿Olvidaste la contraseña?"
+    },
+    
+    "homeScreen": {
+        "titleGroup": {
+            "welcome1": "Bienvenido a",
+            "welcome2": "MotoGrid",
+            "welcome3": "Gestión inteligente de motos en los patios"
+        },
+        "button": {
+            "registerButton": "📍 Registrar Moto en el Patio",
+            "searchButton": "🔍 Buscar Moto por Placa",
+            "viewMapButton": "🗺️ Ver Mapa del Patio",
+            "historyButton": "🧾 Historial de Movimientos",
+            "identifyButton": "📸 Identificar Moto mediante Cámara",
+            "alertButton": "🚨 Alertas y Averías",
+            "viewMotosButton": "📦 Ver Motos en Espera de Salida",
+            "settingsButton": "⚙️ Configuración del Sistema",
+            "aboutButton":"Sobre el proyecto"
+        }
+    },
+    
+    "mapaScreen": {
+        "title": "🗺️ Mapa del Patio"
+    },
+    
+    "registrarScreen": {
+        "title": "📍 Registrar Moto en el Patio",
+        "inputs": {
+            "input1": "Nombre del conductor",
+            "input2": "Placa de la moto",
+            "input3": "Zona o Fila (ej: Zona A)"
+        }
+    },
+    
+    "historicoScreen": {
+        "title": "🧾 Historial de Movimientos"
+    },
+    
+    "detalhesScreen": {
+        "title": "📄 Pantalla de Detalles",
+        "text": "Aquí podrás visualizar los detalles completos de una moto seleccionada."
+    },
+    
+    "configuracoesScreen": {
+        "title": "⚙️ Configuración del Sistema",
+        "notify": "🔔 Notificaciones",
+        "tema": "🌓 Tema Oscuro",
+        "sairButton": "Cerrar Sesión"
+    },
+    
+    "cameraScreen": {
+        "title": "📸 Identificar Moto mediante Cámara",
+        "texts": {
+            "text1": "Activar Reconocimiento",
+            "text2": "Identificando moto..."
+        }
+    },
+    
+    "cadastroScreen": {
+        "title": "Crear Cuenta",
+        "inputs": {
+            "name": "Nombre completo",
+            "password": "Contraseña"
+        },
+        "register": "Registrar"
+    },
+    
+    "buscarScreen": {
+        "title": "🔍 Buscar Moto por Placa",
+        "buscarButton": "Buscar",
+        "input": "Ingresa la placa (ej: ABC1234)",
+        "texts": {
+            "plate": "Placa:",
+            "conductor": "Conductor:",
+            "localization": "Ubicación:"
+        }
     },
 
-    "waitScreen":{
-        "title":"📦 Motos Aguardando Saída"
+    "alertScreen": {
+        "title": "🚨 Alertas y Averías"
+    },
+
+    "waitScreen": {
+        "title": "📦 Motos en Espera de Salida"
+    },
+
+    "aboutScreen": {
+        "title": "Acerca del Proyecto",
+        "description": "Esta aplicación fue desarrollada por estudiantes dedicados, con enfoque en innovación, tecnología y sostenibilidad.",
+        "footer": "© 2025 MotoGrid — Todos los derechos reservados."
     }
-   
 }
