@@ -4,7 +4,8 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from 'expo-router';
 import { useTheme } from './contexts/ThemeContext';
 import { useTranslation } from 'react-i18next';
-import { addMoto } from '../src/services/api/motoService'; // importa sua função da API
+import { addMockMoto } from '../src/services/mockMotoService';
+
 
 export default function Registrar() {
   const [modelo, setModelo] = useState('');
@@ -16,23 +17,27 @@ export default function Registrar() {
   const { t } = useTranslation();
 
   const handleRegistrar = async () => {
-    if (!modelo || !placa || !status || !patioId) {
-      Alert.alert('Erro', 'Preencha todos os campos para registrar a moto.');
-      return;
-    }
+  if (!modelo || !placa || !status || !patioId) {
+    Alert.alert(t("error"), t("alerts.alertRegister.alert1"));
+    return;
+  }
 
-    try {
-      const novaMoto = await addMoto(modelo, placa, status, Number(patioId));
-      Alert.alert('Sucesso', `Moto cadastrada!\nModelo: ${novaMoto.modelo}\nPlaca: ${novaMoto.placa}`);
-      setModelo('');
-      setPlaca('');
-      setStatus('');
-      setPatioId('');
-    } catch (error) {
-      console.error(error);
-      Alert.alert('Erro', 'Não foi possível registrar a moto. Verifique os dados.');
-    }
-  };
+  try {
+    const novaMoto = await addMockMoto(modelo, placa, status, patioId);
+    Alert.alert(
+      'Sucesso',
+      `Moto cadastrada!\nModelo: ${novaMoto.modelo}\nPlaca: ${novaMoto.placa}`
+    );
+
+    setModelo('');
+    setPlaca('');
+    setStatus('');
+    setPatioId('');
+  } catch (error) {
+    console.error(error);
+    Alert.alert('Erro', 'Não foi possível registrar a moto (mock).');
+  }
+};
 
   return (
     <LinearGradient
@@ -42,11 +47,11 @@ export default function Registrar() {
       <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : undefined} style={styles.wrapper}>
         <ScrollView contentContainerStyle={styles.inner}>
           <Text style={[styles.title, { color: temaEscuro ? '#fff' : '#007AFF' }]}>
-            Registrar Moto
+            {t("registrarScreen.title")}
           </Text>
 
           <TextInput
-            placeholder="Modelo"
+            placeholder={t("registrarScreen.inputs.input1")}
             placeholderTextColor={temaEscuro ? '#999' : undefined}
             style={[
               styles.input,
@@ -57,7 +62,7 @@ export default function Registrar() {
           />
 
           <TextInput
-            placeholder="Placa"
+            placeholder={t("registrarScreen.inputs.input2")}
             placeholderTextColor={temaEscuro ? '#999' : undefined}
             style={[
               styles.input,
@@ -70,7 +75,7 @@ export default function Registrar() {
           />
 
           <TextInput
-            placeholder="Status (ex: disponível, em uso)"
+            placeholder={t("registrarScreen.inputs.input3")}
             placeholderTextColor={temaEscuro ? '#999' : undefined}
             style={[
               styles.input,
@@ -81,7 +86,7 @@ export default function Registrar() {
           />
 
           <TextInput
-            placeholder="ID do Pátio"
+            placeholder={t("registrarScreen.inputs.input4")}
             placeholderTextColor={temaEscuro ? '#999' : undefined}
             keyboardType="numeric"
             style={[
@@ -97,7 +102,7 @@ export default function Registrar() {
           </Pressable>
 
           <Pressable onPress={() => router.back()}>
-            <Text style={[styles.voltar, { color: temaEscuro ? '#ccc' : '#007AFF' }]}>Voltar</Text>
+            <Text style={[styles.voltar, { color: temaEscuro ? '#ccc' : '#007AFF' }]}>{t("backHome")}</Text>
           </Pressable>
         </ScrollView>
       </KeyboardAvoidingView>

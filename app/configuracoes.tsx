@@ -69,7 +69,7 @@ export default function Configuracoes() {
       </View>
 
        <Button            
-          title={i18n.language === "pt" ? "Mudar para Espanhol" : "Switch to Portuguese"}
+          title={i18n.language === "pt" ? "Mudar para Espanhol" : "Cambiar al portugués"}
           onPress={toggleLanguage}
           color= "green"           
         />  

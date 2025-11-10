@@ -4,27 +4,26 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from 'expo-router';
 import { useTheme } from './contexts/ThemeContext';
 import { useTranslation } from 'react-i18next';
+import { getMotoByPlaca } from '../src/services/mockMotoService'; // 👈 novo import
 
 export default function Buscar() {
   const router = useRouter();
-  const {t} = useTranslation();
+  const { t } = useTranslation();
   const { temaEscuro } = useTheme();
 
   const [placa, setPlaca] = useState('');
-  const [resultado, setResultado] = useState<null | { placa: string; condutor: string; zona: string }>(null);
+  const [resultado, setResultado] = useState<null | { placa: string; modelo: string; status: string; patio: string }>(null);
 
-  const handleBuscar = () => {
+  const handleBuscar = async () => {
     if (!placa) {
       Alert.alert(t("alerts.alertBuscar.alert1"));
       return;
     }
 
-    if (placa.toUpperCase() === 'ABC1234') {
-      setResultado({
-        placa: 'ABC1234',
-        condutor: 'João da Silva',
-        zona: 'Zona B - Fila 2',
-      });
+    const moto = await getMotoByPlaca(placa);
+
+    if (moto) {
+      setResultado(moto);
     } else {
       setResultado(null);
       Alert.alert(t("alerts.alertBuscar.alert2"));
@@ -63,13 +62,16 @@ export default function Buscar() {
         {resultado && (
           <View style={[styles.resultado, { backgroundColor: temaEscuro ? '#2c2c2c' : '#fff' }]}>
             <Text style={[styles.resultadoTexto, { color: temaEscuro ? '#fff' : '#000' }]}>
-              {t("buscarScreen.texts.plate")} {resultado.placa}
+              Placa: {resultado.placa}
             </Text>
             <Text style={[styles.resultadoTexto, { color: temaEscuro ? '#fff' : '#000' }]}>
-              {t("buscarScreen.texts.conductor")} {resultado.condutor}
+              Modelo: {resultado.modelo}
             </Text>
             <Text style={[styles.resultadoTexto, { color: temaEscuro ? '#fff' : '#000' }]}>
-              {t("buscarScreen.texts.localization")} {resultado.zona}
+              Status: {resultado.status}
+            </Text>
+            <Text style={[styles.resultadoTexto, { color: temaEscuro ? '#fff' : '#000' }]}>
+              Pátio: {resultado.patio}
             </Text>
           </View>
         )}

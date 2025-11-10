@@ -45,6 +45,7 @@ export default function Home() {
           <CustomButton text={t("homeScreen.button.viewMotosButton")} onPress={() => router.push('/aguardando')} />
           <CustomButton text={t("homeScreen.button.settingsButton")} onPress={() => router.push('/configuracoes')} />
           <CustomButton text="patio" onPress={() => router.push('/registrarPatio')} />
+            <CustomButton text="Lista de Pátios" onPress={() => router.push('/listarPatios')} />
           <CustomButton text={t("homeScreen.button.aboutButton")} onPress={() => router.push('/sobre')} />  
           
         </Animatable.View>

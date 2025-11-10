@@ -4,7 +4,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from 'expo-router';
 import { useTheme } from './contexts/ThemeContext';
 import { useTranslation } from 'react-i18next';
-import api from '../src/services/api/apiClient';
+import { addPatio } from '../src/services/persistentMockPatioService'; // <-- importa função mockada
 
 export default function PatioRegistrar() {
   const [nome, setNome] = useState('');
@@ -21,11 +21,7 @@ export default function PatioRegistrar() {
     }
 
     try {
-      await api.post('/patios', {
-        nome,
-        cidade,
-        capacidade: Number(capacidade),
-      });
+      await addPatio(nome, cidade, Number(capacidade)); // 👈 substitui api.post()
       Alert.alert('✅ Sucesso', 'Pátio cadastrado com sucesso!');
       setNome('');
       setCidade('');

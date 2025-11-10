@@ -63,9 +63,10 @@
     "registrarScreen":{
         "title":"📍 Registrar Moto no Pátio",
         "inputs":{
-            "input1":"Nome do condutor",
+            "input1":"Modelo",
             "input2":"Placa da moto",
-            "input3":"Zona ou Fila (ex: Zona A)"
+            "input3":"Status (ex: disponivel, em uso",
+            "input4":"ID do Patio"
         }
     },
     
